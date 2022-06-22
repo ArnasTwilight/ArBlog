@@ -40,4 +40,8 @@ class Category extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
+
+    public static function getAll() {
+        return Category::find()->orderBy('id desc')->limit(7)->all();
+    }
 }

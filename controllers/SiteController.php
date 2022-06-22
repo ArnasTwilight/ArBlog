@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Article;
+use app\models\Category;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +63,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $recent = Article::getRecent();
+        $popular = Article::getPopular();
+        $categories = Category::getAll();
+
+        return $this->render('index', [
+            'recent' => $recent,
+            'popular' => $popular,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -124,5 +134,25 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionView($id)
+    {
+        $article = Article::findOne($id);
+
+        return $this->render('single', [
+            'article' => $article,
+        ]);
+    }
+
+    public function actionCategory($id) {
+
+        $category = Category::findOne($id);
+        $article = Article::find()->where(['category_id' => $id])->orderBy('date asc')->limit(3)->all();
+
+        return $this->render('category', [
+            'category' => $category,
+            'article' => $article,
+        ]);
     }
 }

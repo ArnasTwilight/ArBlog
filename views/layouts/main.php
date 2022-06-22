@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\helpers\Url;
 
 PublicAsset::register($this);
 ?>
@@ -29,8 +30,8 @@ PublicAsset::register($this);
     <header class="header grid--header">
         <nav class="header-nav">
             <ul class="header-nav__list">
-                <li class="logo"><a href="#"></a></li>
-                <li class="header-nav__item active"><a href="#">Home</a></li>
+                <li class="logo"><a href="/"></a></li>
+                <li class="header-nav__item"><a href="/">Home</a></li>
                 <li class="header-nav__item"><a href="#">Category</a></li>
                 <li class="header-nav__item"><a href="#">About us</a></li>
             </ul>

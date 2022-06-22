@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'content:ntext',
+//            'content:ntext',
             'description:ntext',
             'date',
-            //'image',
+            'image',
             //'viewed',
             //'status',
             //'user_id',

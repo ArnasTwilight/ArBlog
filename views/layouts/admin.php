@@ -27,8 +27,7 @@ AdminAsset::register($this);
 
 <aside class="aside-menu aside-menu--grid">
     <nav class="aside-nav">
-        <h1 class="aside-nav__title">Admin
-Panel</h1>
+        <h1 class="aside-nav__title">Admin<br>Panel</h1>
         <ul class="aside-nav__list">
 
             <li class="aside-nav__item active">
@@ -58,7 +57,7 @@ Panel</h1>
     echo Nav::widget([
         'options' => ['class' => 'header-nav__list'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/']],
+            ['label' => 'Home', 'url' => ['/site']],
             ['label' => 'Category', 'url' => ['/site/category']],
             ['label' => 'About us', 'url' => ['/site/about']],
             Yii::$app->user->isGuest ? (
