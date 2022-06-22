@@ -36,7 +36,7 @@ $this->title = 'ArBlog';
     </section>
 
     <section class="discord-widget">
-        <iframe src="https://discord.com/widget?id=249297598530191361&theme=dark" width="245" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <iframe src="https://discord.com/widget?id=249297598530191361&theme=light" width="245" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </section>
 
 </aside>
@@ -45,7 +45,7 @@ $this->title = 'ArBlog';
     <?php foreach ($recent as $post):?>
         <article class="post">
             <div class="post__img">
-                <img src="public/source/img/Image_Post_3.png" alt="post image">
+                <img src="<?= $post->getImage($post->id) ?>" alt="post image">
                 <a href="<?= Url::toRoute(['site/view', 'id' => $post->id]) ?>"><h2 class="post__title"><?= $post->title ?></h2></a>
             </div>
             <div class="post__short-info">

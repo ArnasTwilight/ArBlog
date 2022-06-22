@@ -39,6 +39,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['content', 'description'], 'string'],
             [['date'], 'safe'],
+//            [['date'], 'default', 'value' => date('Y-m-d')],
             [['viewed', 'status', 'user_id', 'category_id'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
         ];
@@ -86,11 +87,22 @@ class Article extends \yii\db\ActiveRecord
     public static function getRecent() {
         return Article::find()->orderBy('date asc')->limit(3)->all();
     }
+
     public static function getPopular() {
         return Article::find()->orderBy('viewed asc')->limit(3)->all();
     }
 
     public function getCategory() {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function saveImage($filename)
+    {
+        $this->image = $filename;
+        return $this->save(false);
+    }
+
+    public function getImage($id) {
+        return ($this->image) ? '/uploads/article/' . $id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
     }
 }
