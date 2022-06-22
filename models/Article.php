@@ -39,7 +39,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['content', 'description'], 'string'],
             [['date'], 'safe'],
-//            [['date'], 'default', 'value' => date('Y-m-d')],
+            [['date'], 'default', 'value' => date('Y-m-d')],
             [['viewed', 'status', 'user_id', 'category_id'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
         ];
