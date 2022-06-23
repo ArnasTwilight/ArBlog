@@ -30,7 +30,7 @@ AdminAsset::register($this);
         <h1 class="aside-nav__title">Admin<br>Panel</h1>
         <ul class="aside-nav__list">
 
-            <li class="aside-nav__item active">
+            <li class="aside-nav__item">
                 <div class="category-icon"></div><a href="/admin/category">Category</a>
             </li>
             <li class="aside-nav__item">

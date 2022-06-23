@@ -41,7 +41,7 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getAll() {
-        return Category::find()->orderBy('id desc')->limit(7)->all();
+    public static function getAll($number = 7) {
+        return Category::find()->orderBy('id desc')->limit($number)->all();
     }
 }

@@ -18,7 +18,6 @@ class ArticleController extends Controller
 {
     private $dirUpload = 'article';
 
-
     /**
      * @inheritDoc
      */
@@ -154,4 +153,6 @@ class ArticleController extends Controller
             'model' => $model,
         ]);
     }
+
+    
 }

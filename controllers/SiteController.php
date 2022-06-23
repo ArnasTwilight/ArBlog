@@ -14,6 +14,11 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    const POPULAR_ASIDE_POST_NUMBER = 3;
+    const RECENT_ASIDE_POST_NUMBER = 3;
+    const CATEGORIES_ASIDE_NUMBER = 7;
+    const INDEX_POST_NUMBER = 3;
+
     /**
      * {@inheritdoc}
      */
@@ -63,13 +68,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $recent = Article::getRecent();
-        $popular = Article::getPopular();
-        $categories = Category::getAll();
+        $recent = Article::getRecent(self::RECENT_ASIDE_POST_NUMBER);
+        $popular = Article::getPopular(self::POPULAR_ASIDE_POST_NUMBER);
+        $articles = Article::getAll(self::INDEX_POST_NUMBER);
+        $categories = Category::getAll(self::CATEGORIES_ASIDE_NUMBER);
 
         return $this->render('index', [
             'recent' => $recent,
             'popular' => $popular,
+            'articles' => $articles,
             'categories' => $categories,
         ]);
     }

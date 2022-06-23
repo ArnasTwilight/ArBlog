@@ -84,12 +84,16 @@ class Article extends \yii\db\ActiveRecord
         return $this->hasMany(Comment::className(), ['article_id' => 'id']);
     }
 
-    public static function getRecent() {
-        return Article::find()->orderBy('date asc')->limit(3)->all();
+    public static function getRecent($number = 3) {
+        return Article::find()->orderBy('date asc')->limit($number)->all();
     }
 
-    public static function getPopular() {
-        return Article::find()->orderBy('viewed asc')->limit(3)->all();
+    public static function getPopular($number = 3) {
+        return Article::find()->orderBy('viewed asc')->limit($number)->all();
+    }
+
+    public static function getAll($number = 3) {
+        return Article::find()->orderBy('date asc')->limit($number)->all();
     }
 
     public function getCategory() {

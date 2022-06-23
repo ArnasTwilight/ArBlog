@@ -135,6 +135,10 @@ body {
 .aside-menu__img {
     position: relative;
 }
+.aside-menu__img > a > img {
+    max-width: 225px;
+    max-height: 120px;
+}
 .aside-menu__img:not(:last-child) {
     margin-bottom: 20px;
 }
