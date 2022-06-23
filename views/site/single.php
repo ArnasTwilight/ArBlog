@@ -11,7 +11,7 @@ $this->title = $article->title;
 <?= $this->render('/partials/sidebar', [
     'popular' => $popular,
     'recent' => $recent,
-    'categories' => $categories,
+    'asideCategories' => $asideCategories,
 ]); ?>
 
 <main class="main grid--main">

@@ -215,6 +215,30 @@ body {
     text-align: justify
 }
 
+/* categories */
+.categories {
+    padding: 15px;
+    background: #ffffff;
+}
+.categories__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.categories__item:not(:first-child) {
+}
+.categories__item > a {
+    font-size: 1.25em;
+    color: #FFFFFF;
+}
+.categories__item {
+    margin: 5px;
+    padding: 10px;
+    background: var(--accent-dark-color);
+}
+.categories__item:hover {
+    background: var(--accent-color);
+}
+
 /* footer */
 .footer {
     height: 200px;

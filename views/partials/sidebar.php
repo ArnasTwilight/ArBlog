@@ -36,13 +36,13 @@ use yii\helpers\Url;
         </section>
     <?php endif; ?>
 
-    <?php if (!empty($categories)): ?>
+    <?php if (!empty($asideCategories)): ?>
     <section class="category">
         <div class="line"></div>
         <h4 class="aside-menu__title">Category</h4>
         <div class="line"></div>
         <ul class="category-list">
-            <?php foreach ($categories as $category):?>
+            <?php foreach ($asideCategories as $category):?>
                 <li class="category-list__item"><a href="<?= Url::toRoute(['site/category', 'id' => $category->id]) ?>"><?= $category->title ?></a></li>
             <?php endforeach;?>
         </ul>

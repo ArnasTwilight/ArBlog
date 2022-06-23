@@ -71,13 +71,13 @@ class SiteController extends Controller
         $recent = Article::getRecent(self::RECENT_ASIDE_POST_NUMBER);
         $popular = Article::getPopular(self::POPULAR_ASIDE_POST_NUMBER);
         $articles = Article::getAll(self::INDEX_POST_NUMBER);
-        $categories = Category::getAll(self::CATEGORIES_ASIDE_NUMBER);
+        $asideCategories = Category::getAsideCategory(self::CATEGORIES_ASIDE_NUMBER);
 
         return $this->render('index', [
             'recent' => $recent,
             'popular' => $popular,
             'articles' => $articles,
-            'categories' => $categories,
+            'asideCategories' => $asideCategories,
         ]);
     }
 
@@ -160,6 +160,15 @@ class SiteController extends Controller
         return $this->render('category', [
             'category' => $category,
             'article' => $article,
+        ]);
+    }
+
+    public function actionCategories()
+    {
+        $categories = Category::getAll();
+
+        return $this->render('categories', [
+            'categories' => $categories,
         ]);
     }
 }

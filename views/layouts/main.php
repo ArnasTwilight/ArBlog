@@ -31,8 +31,8 @@ PublicAsset::register($this);
         <nav class="header-nav">
             <ul class="header-nav__list">
                 <li class="logo"><a href="/"></a></li>
-                <li class="header-nav__item"><a href="/">Home</a></li>
-                <li class="header-nav__item"><a href="#">Category</a></li>
+                <li class="header-nav__item"><a href="<?= Url::toRoute('/')?>">Home</a></li>
+                <li class="header-nav__item"><a href="<?= Url::toRoute('/site/categories')?>">Category</a></li>
                 <li class="header-nav__item"><a href="#">About us</a></li>
             </ul>
         </nav>
