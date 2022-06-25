@@ -40,7 +40,7 @@ PublicAsset::register($this);
             <ul class="user__list">
                 <?php if (Yii::$app->user->isGuest):?>
                     <li class="user__item"><a href="<?= Url::toRoute('/auth/login')?>">Login</a></li>
-                    <li class="user__item"><a href="<?= Url::toRoute('/auth/register')?>">Register</a></li>
+                    <li class="user__item"><a href="<?= Url::toRoute('/auth/signup')?>">Register</a></li>
                 <?php else: ?>
                     <li class="user__item"><a href="<?= Url::toRoute('/auth/logout')?>">logout</a></li>
                     <li class="user__item user-login"><a href="#"><?= Yii::$app->user->identity->login ?></a></li>
