@@ -234,6 +234,7 @@ body {
     margin: 5px;
     padding: 10px;
     background: var(--accent-dark-color);
+    transition: 0.3s;
 }
 .categories__item:hover {
     background: var(--accent-color);

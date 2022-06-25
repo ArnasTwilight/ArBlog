@@ -14,6 +14,7 @@ use Yii;
  * @property string|null $password
  * @property string|null $image
  * @property int|null $isAdmin
+ * @property string|null $about
  *
  * @property Comment[] $comments
  */
@@ -34,6 +35,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['isAdmin'], 'integer'],
+            [['about'], 'string'],
             [['name', 'email', 'login', 'password', 'image'], 'string', 'max' => 255],
         ];
     }
@@ -51,6 +53,7 @@ class User extends \yii\db\ActiveRecord
             'password' => 'Password',
             'image' => 'Image',
             'isAdmin' => 'Is Admin',
+            'about' => 'About',
         ];
     }
 
