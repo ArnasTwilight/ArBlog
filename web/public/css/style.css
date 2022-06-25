@@ -107,6 +107,12 @@ body {
     display: flex;
     margin-right: 60px;
 }
+.user__list {
+    display: flex;
+}
+.user__item:not(:last-child){
+    margin-right: 40px;
+}
 .user__item > a:hover {
     color: var(--accent-color);
 }
@@ -238,6 +244,39 @@ body {
 }
 .categories__item:hover {
     background: var(--accent-color);
+}
+
+/* login */
+.login-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+.login-container > h1, p {
+    text-align: center;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 0;
+}
+.form-group {
+    padding: 10px 0;
+}
+
+.error {
+    color: #ff0000;
+}
+.btn {
+    color: #FFFFFF;
+    margin: 0 auto;
+    padding: 10px;
+    background: var(--accent-color);
+    border: 0;
+    width: 100%;
+}
+.btn:hover {
+    background: var(--accent-dark-color);
 }
 
 /* footer */

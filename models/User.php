@@ -3,7 +3,8 @@
 namespace app\models;
 
 use Yii;
-use \yii\db\ActiveRecord;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -19,8 +20,33 @@ use \yii\db\ActiveRecord;
  *
  * @property Comment[] $comments
  */
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
+    public static function findIdentity($id)
+    {
+        return User::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        // TODO: Implement findIdentityByAccessToken() method.
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        // TODO: Implement getAuthKey() method.
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        // TODO: Implement validateAuthKey() method.
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -67,4 +93,15 @@ class User extends ActiveRecord
     {
         return $this->hasMany(Comment::className(), ['user_id' => 'id']);
     }
+
+    public static function findBylogin($login)
+    {
+        return User::find()->where(['login' => $login])->one();
+    }
+
+    public function validatePassword($password)
+    {
+        return ($this->password == $password) ? true : false;
+    }
+
 }

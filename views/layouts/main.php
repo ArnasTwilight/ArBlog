@@ -38,7 +38,13 @@ PublicAsset::register($this);
         </nav>
         <div class="user">
             <ul class="user__list">
-                <li class="user__item"><a href="#">Login</a></li>
+                <?php if (Yii::$app->user->isGuest):?>
+                    <li class="user__item"><a href="<?= Url::toRoute('/auth/login')?>">Login</a></li>
+                    <li class="user__item"><a href="<?= Url::toRoute('/auth/register')?>">Register</a></li>
+                <?php else: ?>
+                    <li class="user__item"><a href="<?= Url::toRoute('/auth/logout')?>">logout</a></li>
+                    <li class="user__item user-login"><a href="#"><?= Yii::$app->user->identity->login ?></a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </header>
