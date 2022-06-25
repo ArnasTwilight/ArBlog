@@ -23,9 +23,13 @@ ul, li {
 a {
     text-decoration: none;
 }
+a:hover {
+    text-decoration: none !important;
+}
 
 :root {
     --accent-color: #0085FF;
+    --accent-dark-color: #005096FF;
     --gray-color: #DEDEDE;
 }
 /* ----------------------- */
@@ -76,6 +80,9 @@ a {
     line-height: 30px;
     margin-left: 20px;
 }
+.aside-nav__item > a:hover {
+    color: var(--accent-dark-color);
+}
 
 .category-icon {
     width: 32px;
@@ -114,7 +121,13 @@ a {
     border-radius: 10px;
     border-bottom: 0;
 }
+.active:hover {
+    background: var(--accent-dark-color);
+}
 .active > a{
+    color: #FFFFFF;
+}
+.active > a:hover {
     color: #FFFFFF;
 }
 .active > div {
