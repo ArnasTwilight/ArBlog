@@ -17,7 +17,7 @@ class SiteController extends Controller
     const POPULAR_ASIDE_POST_NUMBER = 3;
     const RECENT_ASIDE_POST_NUMBER = 3;
     const CATEGORIES_ASIDE_NUMBER = 7;
-    const INDEX_POST_NUMBER = 3;
+    const PAGE_SIZE = 3;
 
     /**
      * {@inheritdoc}
@@ -68,15 +68,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $data = Article::getAll(self::PAGE_SIZE);
+
         $recent = Article::getRecent(self::RECENT_ASIDE_POST_NUMBER);
         $popular = Article::getPopular(self::POPULAR_ASIDE_POST_NUMBER);
-        $articles = Article::getAll(self::INDEX_POST_NUMBER);
         $asideCategories = Category::getAsideCategory(self::CATEGORIES_ASIDE_NUMBER);
 
         return $this->render('index', [
             'recent' => $recent,
             'popular' => $popular,
-            'articles' => $articles,
+            'articles' => $data['articles'],
+            'pagination' => $data['pagination'],
             'asideCategories' => $asideCategories,
         ]);
     }
@@ -118,14 +120,20 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionCategory($id) {
-
+    public function actionCategory($id)
+    {
         $category = Category::findOne($id);
-        $article = Article::find()->where(['category_id' => $id])->orderBy('date asc')->limit(3)->all();
+        $data = Article::getAllPostCategory($category['id'], self::PAGE_SIZE);
+
+        if (empty($data['articles'])){
+            $emptyCategory = Article::nonePostInCategory($category['title']);
+        }
 
         return $this->render('category', [
             'category' => $category,
-            'article' => $article,
+            'articles' => $data['articles'],
+            'pagination' => $data['pagination'],
+            'emptyCategory' => $emptyCategory,
         ]);
     }
 

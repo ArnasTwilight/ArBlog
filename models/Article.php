@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 use yii\db\ActiveRecord;
 
 /**
@@ -93,8 +94,24 @@ class Article extends ActiveRecord
         return Article::find()->orderBy('viewed asc')->limit($number)->all();
     }
 
-    public static function getAll($number = 3) {
-        return Article::find()->orderBy('date asc')->limit($number)->all();
+    public static function getAll($pageSize = 3)
+    {
+        $query = Article::find();
+        $count = $query->count();
+
+        $data = Article::getPagination($query, $count, $pageSize);
+
+        return $data;
+    }
+
+    public static function getAllPostCategory($categoryId, $pageSize = 3)
+    {
+        $query = Article::find()->where(['category_id' => intval($categoryId)]);
+        $count = $query->count();
+
+        $data = Article::getPagination($query, $count, $pageSize);
+
+        return $data;
     }
 
     public function getCategory() {
@@ -109,5 +126,31 @@ class Article extends ActiveRecord
 
     public function getImage($id) {
         return ($this->image) ? '/uploads/article/' . $id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
+    }
+
+    public static function nonePostInCategory ($categoryName)
+    {
+        $error = '
+         <div class="error-block">
+            <div>
+                <p>No posts in '. $categoryName .' category</p>
+            </div>
+        </div>';
+
+        return $error;
+    }
+
+    private static function getPagination ($query, $count, $pageSize)
+    {
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+
+        $articles = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        $data['articles'] = $articles;
+        $data['pagination'] = $pagination;
+
+        return $data;
     }
 }

@@ -2,9 +2,11 @@
 
 /** @var yii\web\View $this */
 /** @var app\controllers\SiteController $category */
-/** @var app\controllers\SiteController $article */
+/** @var app\controllers\SiteController $articles */
+/** @var app\controllers\SiteController $emptyCategory */
 
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 $this->title = $category->title;
 ?>
@@ -16,7 +18,7 @@ $this->title = $category->title;
 ]); ?>
 
 <main class="main grid--main">
-    <?php foreach ($article as $post):?>
+    <?php foreach ($articles as $post):?>
         <article class="post">
             <div class="post__img">
                 <img src="<?= $post->getImage($post->id) ?>" alt="post image">
@@ -31,4 +33,10 @@ $this->title = $category->title;
             </div>
         </article>
     <?php endforeach; ?>
+    <?= $emptyCategory ?>
+    <?php
+    echo LinkPager::widget([
+        'pagination' => $pagination,
+    ])
+    ?>
 </main>

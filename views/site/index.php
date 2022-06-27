@@ -5,8 +5,10 @@
 /** @var app\controllers\SiteController $recent */
 /** @var app\controllers\SiteController $categories */
 /** @var app\controllers\SiteController $articles */
+/** @var app\controllers\SiteController $pagination */
 
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 $this->title = 'ArBlog';
 ?>
@@ -33,4 +35,10 @@ $this->title = 'ArBlog';
             </div>
         </article>
     <?php endforeach; ?>
+    <?php
+    echo LinkPager::widget([
+        'pagination' => $pagination,
+    ])
+    ?>
 </main>
+

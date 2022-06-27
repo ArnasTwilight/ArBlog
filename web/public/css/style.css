@@ -279,6 +279,46 @@ body {
     background: var(--accent-dark-color);
 }
 
+/* error */
+.error-block {
+    background-color: #FFFFFF;
+    padding: 40px;
+}
+
+/* pagination */
+.pagination {
+    display: flex;
+}
+.pagination a, span {
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 1.25em;
+}
+.pagination li {
+    min-width: 50px;
+    min-height: 50px;
+    background-color: #FFFFFF;
+}
+.pagination li:not(:last-child) {
+    margin-right: 10px;
+}
+.pagination a:hover {
+    color: #FFFFFF;
+    background-color: var(--accent-color);
+}
+.disabled span {
+    color: #c1c1c1;
+}
+.active a {
+    color: #FFFFFF;
+    background-color: var(--accent-dark-color);
+}
+
 /* footer */
 .footer {
     height: 200px;

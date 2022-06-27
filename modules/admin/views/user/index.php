@@ -32,15 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'email:email',
             'login',
-            'password',
             //'image',
-            //'isAdmin',
+            'isAdmin',
             //'about:ntext',
             [
                 'class' => ActionColumn::className(),
-//                'urlCreator' => function ($action, User $model, $key, $index, $column) {
-//                    return Url::toRoute([$action, 'id' => $model->id]);
-//                 }
             ],
         ],
     ]); ?>

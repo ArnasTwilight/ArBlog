@@ -84,6 +84,12 @@ a:hover {
     color: var(--accent-dark-color);
 }
 
+.house-icon {
+    width: 32px;
+    height: 32px;
+    background: url("../source/icon/house.svg") no-repeat;
+    background-size: cover;
+}
 .category-icon {
     width: 32px;
     height: 32px;

@@ -23,11 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'login') ?>
 
-    <?= $form->field($model, 'password') ?>
-
     <?php // echo $form->field($model, 'image') ?>
 
-    <?php // echo $form->field($model, 'isAdmin') ?>
+    <?php  echo $form->field($model, 'isAdmin') ?>
 
     <?php // echo $form->field($model, 'about') ?>
 
