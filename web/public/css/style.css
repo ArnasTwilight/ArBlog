@@ -269,11 +269,10 @@ body {
 }
 .btn {
     color: #FFFFFF;
-    margin: 0 auto;
     padding: 10px;
     background: var(--accent-color);
-    border: 0;
     width: 100%;
+    border: 0;
 }
 .btn:hover {
     background: var(--accent-dark-color);
@@ -317,6 +316,62 @@ body {
 .active a {
     color: #FFFFFF;
     background-color: var(--accent-dark-color);
+}
+
+/* cabinet */
+.cabinet {
+    background-color: #FFFFFF;
+    padding: 40px;
+}
+.cabinet-user {
+    display: flex;
+}
+.cabinet img {
+    width: 128px;
+    height: 128px;
+    border: 1px solid black;
+}
+.user-info {
+    margin-left: 20px;
+}
+.user-info__item {
+    font-size: 1.25em;
+    padding: 10px;
+    border-bottom: 1px solid #c1c1c1;
+}
+.user-btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+.danger {
+    background-color: #bd0000;
+    width: 100px;
+    margin: 0 0 0 auto;
+}
+.danger:hover {
+    background-color: #db0000;
+}
+.warning {
+    background-color: #e07e00;
+}
+.warning:hover {
+    background-color: #b16200;
+}
+.download-img {
+    width: 100px;
+}
+.help-block {
+    color: #ff0000;
+}
+.user-update-form form div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 400px;
+}
+#user-about {
+    height: 200px;
 }
 
 /* footer */

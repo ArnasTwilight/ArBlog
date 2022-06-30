@@ -64,6 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['isAdmin'], 'integer'],
             [['about'], 'string'],
             [['name', 'email', 'login', 'password', 'image'], 'string', 'max' => 255],
+            ['email', 'unique', 'message' => 'This email address has already been taken.'],
         ];
     }
 
@@ -109,4 +110,23 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
+    public function getImage($id) {
+        return ($this->image) ? '/uploads/user/' . $id . '/' . $this->image : '/uploads/user/no_avatar/no-avatar.jpg';
+    }
+    public function saveImage($filename) {
+        $this->image = $filename;
+        return $this->save(false);
+    }
+    public function deleteImage($filename, $dirName, $idUser)
+    {
+        if (Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $idUser . '/' . $filename)
+        {
+            unlink(Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $idUser . '/' . $filename);
+
+            $this->image = '';
+
+            $this->save(false);
+        }
+    }
 }
+

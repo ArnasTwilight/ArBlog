@@ -197,8 +197,44 @@ a:hover {
 
 /*  main  */
 .content {
+    display: inline-flex;
+    flex-wrap: wrap;
     border-radius: 10px;
     background: #FFFFFF;
     margin: 40px;
     padding: 40px;
+}
+
+.container-info {
+    display: inline-block;
+    margin-right: 30px;
+    width: 400px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgba(165, 165, 165, 0.5);
+}
+.header-info {
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    padding: 25px 0 0 30px;
+    border-bottom: 2px solid var(--accent-dark-color);
+    font-size: 1.5em;
+}
+.content-info {
+    padding-top: 20px;
+    font-size: 1.25em;
+}
+.content-info li {
+    padding: 10px 0;
+    margin: 0 auto;
+    border-bottom: #c1c1c1 1px solid;
+    width: 80%;
+}
+.content-info li span {
+    display: inline-block;
+}
+.content-info li a {
+    margin-left: 10px;
 }

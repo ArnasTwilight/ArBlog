@@ -18,9 +18,13 @@ class SignupForm extends Model
             [['login', 'email', 'password', 'passwordRepeat'], 'required'],
             [['login'], 'string'],
             [['login'], 'unique', 'targetClass' => 'app\models\User', 'targetAttribute' => 'login'],
+            ['login', 'string', 'min' => 2, 'max' => 255],
             [['email'], 'email'],
             [['email'], 'unique', 'targetClass' => 'app\models\User', 'targetAttribute' => 'email'],
+            ['email', 'string', 'max' => 255],
             [['password'], 'validatePasswordMatch'],
+            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            ['passwordRepeat', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
 

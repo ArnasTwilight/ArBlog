@@ -44,8 +44,10 @@ class ImageUpload extends Model
 
     private function checkFileExists()
     {
-        if (file_exists($this->getDir() . '/' . $this->currentImage)){
-            unlink($this->getDir() . '/' . $this->currentImage);
+        if (!empty($this->currentImage)) {
+            if (file_exists($this->getDir() . '/' . $this->currentImage)){
+                unlink($this->getDir() . '/' . $this->currentImage);
+            }
         }
     }
 

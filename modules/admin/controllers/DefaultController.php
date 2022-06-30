@@ -19,10 +19,10 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $users = User::find()->orderBy('id asc')->limit(5)->all();
-        $recent = Article::find()->orderBy('id asc')->limit(3)->all();
-        $categories = Category::find()->orderBy('id asc')->limit(3)->all();
-        $tags = Tag::find()->orderBy('id asc')->limit(3)->all();
+        $users = User::find()->orderBy('id desc')->limit(5)->all();
+        $recent = Article::find()->orderBy('id desc')->limit(3)->all();
+        $categories = Category::find()->orderBy('id desc')->limit(3)->all();
+        $tags = Tag::find()->orderBy('id desc')->limit(3)->all();
 
         return $this->render('index', [
             'users' => $users,

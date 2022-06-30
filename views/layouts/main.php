@@ -33,7 +33,7 @@ PublicAsset::register($this);
                 <li class="logo"><a href="/"></a></li>
                 <li class="header-nav__item"><a href="<?= Url::toRoute('/')?>">Home</a></li>
                 <li class="header-nav__item"><a href="<?= Url::toRoute('/site/categories')?>">Category</a></li>
-                <li class="header-nav__item"><a href="#">About us</a></li>
+                <li class="header-nav__item"><a href="<?= Url::toRoute('/site/about')?>">About us</a></li>
             </ul>
         </nav>
         <div class="user">
@@ -43,7 +43,7 @@ PublicAsset::register($this);
                     <li class="user__item"><a href="<?= Url::toRoute('/auth/signup')?>">Register</a></li>
                 <?php else: ?>
                     <li class="user__item"><a href="<?= Url::toRoute('/auth/logout')?>">logout</a></li>
-                    <li class="user__item user-login"><a href="#"><?= Yii::$app->user->identity->login ?></a></li>
+                    <li class="user__item user-login"><a href="<?= Url::toRoute(['/cabinet', 'id' =>  Yii::$app->user->id])?>"><?= Yii::$app->user->identity->login ?></a></li>
                 <?php endif; ?>
             </ul>
         </div>
