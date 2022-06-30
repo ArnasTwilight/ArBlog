@@ -197,17 +197,19 @@ a:hover {
 
 /*  main  */
 .content {
-    display: inline-flex;
-    flex-wrap: wrap;
     border-radius: 10px;
     background: #FFFFFF;
     margin: 40px;
     padding: 40px;
 }
-
+.home-admin {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
 .container-info {
     display: inline-block;
     margin-right: 30px;
+    margin-bottom: 30px;
     width: 400px;
     height: 300px;
     border-radius: 20px;

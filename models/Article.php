@@ -87,11 +87,11 @@ class Article extends ActiveRecord
     }
 
     public static function getRecent($number = 3) {
-        return Article::find()->orderBy('date asc')->limit($number)->all();
+        return Article::find()->orderBy('date desc')->limit($number)->all();
     }
 
     public static function getPopular($number = 3) {
-        return Article::find()->orderBy('viewed asc')->limit($number)->all();
+        return Article::find()->orderBy('viewed desc')->limit($number)->all();
     }
 
     public static function getAll($pageSize = 3)
@@ -145,6 +145,7 @@ class Article extends ActiveRecord
         $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
 
         $articles = $query->offset($pagination->offset)
+            ->orderBy('date desc')
             ->limit($pagination->limit)
             ->all();
 

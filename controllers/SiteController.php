@@ -115,6 +115,8 @@ class SiteController extends Controller
     {
         $article = Article::findOne($id);
 
+        $article["content"] = nl2br($article["content"]);
+
         return $this->render('single', [
             'article' => $article,
         ]);
