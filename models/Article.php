@@ -41,9 +41,10 @@ class Article extends ActiveRecord
         return [
             [['content', 'description'], 'string'],
             [['date'], 'safe'],
-            [['date'], 'default', 'value' => date('Y-m-d')],
+            [['date'], 'default', 'value' => date('Y-m-d H:i:s')],
             [['viewed', 'status', 'user_id', 'category_id'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
+            ['title', 'required'],
         ];
     }
 

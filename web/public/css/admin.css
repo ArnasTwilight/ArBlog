@@ -240,3 +240,6 @@ a:hover {
 .content-info li a {
     margin-left: 10px;
 }
+.help-block {
+    color: red;
+}
