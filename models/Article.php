@@ -129,6 +129,15 @@ class Article extends ActiveRecord
         return ($this->image) ? '/uploads/article/' . $id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
     }
 
+    public function getDate() {
+        return Yii::$app->formatter->asDatetime($this->date);
+    }
+
+    public function viewedCounter () {
+        $this->viewed += 1;
+        return $this->save(false);
+    }
+
     public static function nonePostInCategory ($categoryName)
     {
         $error = '

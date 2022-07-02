@@ -3,7 +3,7 @@
     font-weight: 600;
     font-style: normal;
     src: local("Jura SemiBold"),
-        url("../source/font/Jura-SemiBold.woff");
+    url("../source/font/Jura-SemiBold.woff");
 }
 
 * {
@@ -25,8 +25,8 @@ a {
     --accent-dark-color: #005096;
     --gray-color: #C1C1C1;
     --dark-color: #1C1C1C;
-    --frame-color: #ffffff;
-    --text-color: #000000;
+    --frame-color: #343434;
+    --text-color: #ffffff;
     --text-second-color: #afafaf;
 }
 
@@ -39,7 +39,7 @@ body::-webkit-scrollbar-thumb {
 }
 /* ----------------------- */
 body {
-    background: url("../source/Background.png") no-repeat -450px -50px;
+    background: url("../source/Background_black.png") no-repeat -450px -50px;
 }
 
 .wrapper {
@@ -268,6 +268,7 @@ body {
     height: 24px;
     background: url("../source/icon/eye.svg") no-repeat;
     background-size: cover;
+    -webkit-filter: invert(100%);
 }
 .post__viewed p {
     display: block;
@@ -356,6 +357,7 @@ body {
     height: 100%;
     text-align: center;
     font-size: 1.25em;
+    color: var(--text-color);
 }
 .pagination li {
     min-width: 50px;
@@ -370,7 +372,7 @@ body {
     background-color: var(--accent-color);
 }
 .disabled span {
-    color: #c1c1c1;
+    color: var(--text-second-color);
 }
 .active a {
     color: #FFFFFF;
@@ -388,12 +390,12 @@ body {
 .cabinet img {
     width: 128px;
     height: 128px;
-    border: 1px solid black;
 }
 .user-info {
     margin-left: 20px;
 }
 .user-info__item {
+    color: var(--text-color);
     font-size: 1.25em;
     padding: 10px;
     border-bottom: 1px solid #c1c1c1;
@@ -438,6 +440,7 @@ body {
     margin-top: 30px;
 }
 .black-theme {
+    color: var(--text-color);
     line-height: 38px;
 }
 

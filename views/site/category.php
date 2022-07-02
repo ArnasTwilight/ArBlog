@@ -30,6 +30,14 @@ $this->title = $category->title;
                 <p class="post__description">
                     <?= $post->description ?>
                 </p>
+                <a href="<?= Url::toRoute(['site/view', 'id' => $post->id]) ?>" class="read_button">Read this post</a>
+                <div class="post__info">
+                    <div class="post__date"><?= $post->getDate() ?></div>
+                    <div class="post__viewed">
+                        <p><?= (int) $post->viewed ?></p>
+                        <div class="viewed-icon"></div>
+                    </div>
+                </div>
             </div>
         </article>
     <?php endforeach; ?>

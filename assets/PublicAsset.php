@@ -10,9 +10,10 @@ class PublicAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'public/css/normalize.css',
-        'public/css/style.css',
+        ['public/css/style.css', 'id' => 'theme'],
     ];
     public $js = [
+        'public/js/theme.js',
     ];
     public $depends = [
     ];

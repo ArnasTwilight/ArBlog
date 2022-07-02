@@ -13,7 +13,6 @@ $this->title = 'Cabinet: ' . $user->login;
 
     <section class="cabinet-user">
         <img src="<?= $user->getImage($user->id) ?>" alt="avatar">
-
         <ul class="user-info">
             <li class="user-info__item">Name: <?= $user->name ?></li>
             <li class="user-info__item">Login: <?= $user->login ?></li>
@@ -26,11 +25,19 @@ $this->title = 'Cabinet: ' . $user->login;
             <?php endif; ?>
         </ul>
     </section>
-    <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-        'class' => 'btn user-btn danger',
-        'data' => [
-            'confirm' => 'Are you sure you want to delete this item?',
-            'method' => 'post',
-        ],
-    ]) ?>
+
+    <div class="control-user">
+        <div class="black-theme">
+            Dark theme:  <input type="checkbox" class="checkbox-theme">
+        </div>
+
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            'class' => 'btn user-btn danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </div>
+
 </main>

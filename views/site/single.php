@@ -26,6 +26,13 @@ $this->title = $article->title;
                 <p class="post__description">
                     <?= $article->content ?>
                 </p>
+                <div class="post__info">
+                    <div class="post__date"><?= $article->getDate() ?></div>
+                    <div class="post__viewed">
+                        <p><?= (int) $article->viewed ?></p>
+                        <div class="viewed-icon"></div>
+                    </div>
+                </div>
             </div>
         </article>
 </main>
