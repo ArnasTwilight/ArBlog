@@ -280,6 +280,24 @@ body {
     justify-content: left;
     color: var(--text-second-color);
 }
+.post__tags {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+.post__tags-item {
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    transition: 0.5s;
+}
+.post__tags-item:not(:last-child) {
+    margin-right: 5px;
+}
+.post__tags-item:hover {
+    background: var(--accent-color);
+    color: #FFFFFF;
+}
 
 /* categories */
 .categories {
@@ -388,7 +406,6 @@ body {
 .cabinet img {
     width: 128px;
     height: 128px;
-    border: 1px solid black;
 }
 .user-info {
     margin-left: 20px;

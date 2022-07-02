@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\data\Pagination;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "article".
@@ -119,10 +120,39 @@ class Article extends ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
+    public function getTags() {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('article_tag', ['article_id' => 'id']);
+    }
+
+    public function getSelectedTags($element = 'id')
+    {
+        $selectedIds = $this->getTags()->select($element)->asArray()->all();
+        return ArrayHelper::getColumn($selectedIds, $element);
+    }
+
     public function saveImage($filename)
     {
         $this->image = $filename;
         return $this->save(false);
+    }
+
+    public function saveTags($tags)
+    {
+        if(is_array($tags))
+        {
+            $this->clearCurrentTags();
+
+            foreach ($tags as $tag_id)
+            {
+                $tag = Tag::findOne($tag_id);
+                $this->link('tags', $tag);
+            }
+        }
+    }
+
+    public function clearCurrentTags(){
+        ArticleTag::deleteAll(['article_id' => $this->id]);
     }
 
     public function getImage($id) {

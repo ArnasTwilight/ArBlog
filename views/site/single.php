@@ -2,6 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var app\controllers\SiteController $article */
+/** @var app\controllers\SiteController $tags */
 
 use yii\helpers\Url;
 
@@ -21,7 +22,14 @@ $this->title = $article->title;
                 <a href=""><h2 class="post__title"><?= $article->title ?></h2></a>
             </div>
             <div class="post__short-info">
-                <h3 class="post__category"><a href="#"><?= $article->category->title ?></a></h3>
+                <h3 class="post__category"><a href="<?= Url::toRoute(['site/category', 'id' => $article->category->id]) ?>"><?= $article->category->title ?></a></h3>
+                <?php if (!empty($tags)):?>
+                <div class="post__tags">
+                    <?php foreach ($tags as $tag): ?>
+                        <a href="#" class="post__tags-item"><?= $tag ?></a>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
                 <div class="line"></div>
                 <p class="post__description">
                     <?= $article->content ?>

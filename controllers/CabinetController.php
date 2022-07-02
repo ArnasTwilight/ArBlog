@@ -18,10 +18,15 @@ class CabinetController extends Controller
 
     public function actionIndex($id)
     {
-        $this->accessControl($id);
+        if (!empty(User::findOne($id)))
+        {
+            $this->accessControl($id);
 
-        $user = User::find()->where(['id' => $id])->one();
-        unset($user['password'], $user['isAdmin']);
+            $user = User::findOne($id);
+            unset($user['password'], $user['isAdmin']);
+        } else {
+            return $this->redirect(['/cabinet', 'id' => Yii::$app->user->identity->id]);
+        }
 
         return $this->render('index', [
             'user' => $user,

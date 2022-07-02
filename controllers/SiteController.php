@@ -3,9 +3,12 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\ArticleTag;
 use app\models\Category;
+use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -113,24 +116,33 @@ class SiteController extends Controller
 
     public function actionView($id)
     {
-        $article = Article::findOne($id);
-
-//        $article["content"] = nl2br($article["content"]);
-
-        $article->viewedCounter();
+        if (!empty(Article::findOne($id)))
+        {
+            $article = Article::findOne($id);
+            $tags = $article->getSelectedTags('title');
+            $article->viewedCounter();
+        } else {
+            return $this->redirect('error');
+        }
 
         return $this->render('single', [
+            'tags' => $tags,
             'article' => $article,
         ]);
     }
 
     public function actionCategory($id)
     {
-        $category = Category::findOne($id);
-        $data = Article::getAllPostCategory($category['id'], self::PAGE_SIZE);
+        if (!empty(Category::findOne($id)))
+        {
+            $category = Category::findOne($id);
+            $data = Article::getAllPostCategory($category['id'], self::PAGE_SIZE);
 
-        if (empty($data['articles'])){
-            $emptyCategory = Article::nonePostInCategory($category['title']);
+            if (empty($data['articles'])){
+                $emptyCategory = Article::nonePostInCategory($category['title']);
+            }
+        } else {
+            return $this->redirect('error');
         }
 
         return $this->render('category', [
