@@ -83,8 +83,7 @@ class Article extends ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getComments()
-    {
+    public function getComments(){
         return $this->hasMany(Comment::className(), ['article_id' => 'id']);
     }
 
@@ -112,6 +111,21 @@ class Article extends ActiveRecord
         $count = $query->count();
 
         $data = Article::getPagination($query, $count, $pageSize);
+
+        return $data;
+    }
+
+    private static function getPagination ($query, $count, $pageSize, $sort = 'desc')
+    {
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+
+        $articles = $query->offset($pagination->offset)
+            ->orderBy('date ' . $sort)
+            ->limit($pagination->limit)
+            ->all();
+
+        $data['element'] = $articles;
+        $data['pagination'] = $pagination;
 
         return $data;
     }
@@ -180,22 +194,13 @@ class Article extends ActiveRecord
         return $error;
     }
 
-    private static function getPagination ($query, $count, $pageSize)
+    public function getArticleComments($id, $pageSize = 5)
     {
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+        $query = Comment::find()->where(['status' => 1, 'article_id' => $id]);
+        $count = $query->count();
 
-        $articles = $query->offset($pagination->offset)
-            ->orderBy('date desc')
-            ->limit($pagination->limit)
-            ->all();
-
-        $data['articles'] = $articles;
-        $data['pagination'] = $pagination;
+        $data = Article::getPagination($query, $count, $pageSize);
 
         return $data;
-    }
-
-    public function getArticleComments(){
-        return $this->getComments()->where(['status' => 1])->all();
     }
 }

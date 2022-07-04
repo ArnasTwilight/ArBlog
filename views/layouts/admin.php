@@ -37,23 +37,22 @@ AdminAsset::register($this);
             </div>
         </div>
 
-<!--        <h1 class="aside-nav__title">Admin<br>Panel</h1>-->
         <ul class="aside-nav__list">
 
             <li class="aside-nav__item">
                 <div class="house-icon"></div><a href="/admin">Home</a>
             </li>
             <li class="aside-nav__item">
-                <div class="category-icon"></div><a href="/admin/category">Category</a>
-            </li>
-            <li class="aside-nav__item">
                 <div class="article-icon"></div><a href="/admin/article">Article</a>
             </li>
             <li class="aside-nav__item">
-                <div class="article-icon"></div><a href="/admin/comment">Comment</a>
+                <div class="comment-icon"></div><a href="/admin/comment">Comment</a>
             </li>
             <li class="aside-nav__item">
                 <div class="user-icon"></div><a href="/admin/user">User</a>
+            </li>
+            <li class="aside-nav__item">
+                <div class="category-icon"></div><a href="/admin/category">Category</a>
             </li>
             <li class="aside-nav__item">
                 <div class="tag-icon"></div><a href="/admin/tag">Tag</a>

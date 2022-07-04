@@ -6,7 +6,7 @@
 
 use yii\helpers\Url;
 
-$this->title = 'Categories';
+$this->title = 'Tags';
 ?>
 
 <?= $this->render('/partials/sidebar', [
@@ -19,15 +19,16 @@ $this->title = 'Categories';
     <article class="categories">
         <ul class="categories__list">
 
-            <?php if(Yii::$app->session->getFlash('categories')): ?>
+            <?php if(Yii::$app->session->getFlash('tags')): ?>
                 <li class="flash--category-tags">
-                    <?= Yii::$app->session->getFlash('categories') ?>
+                    <?= Yii::$app->session->getFlash('tags') ?>
                 </li>
             <?php endif; ?>
 
-            <?php if(!empty ($categories)): foreach ($categories as $category): ?>
-            <li class="categories__item"><a href="<?= Url::toRoute(['site/category', 'id' => $category->id]) ?>"><?= $category->title ?></a></li>
+            <?php if(!empty ($tags)): foreach ($tags as $tag): ?>
+                <li class="categories__item"><a href="<?= Url::toRoute(['site/tag', 'id' => $tag->id]) ?>"><?= $tag->title ?></a></li>
             <?php endforeach; endif; ?>
+
         </ul>
     </article>
 </main>

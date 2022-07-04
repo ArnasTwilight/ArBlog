@@ -28,6 +28,8 @@ a {
     --frame-color: #ffffff;
     --text-color: #000000;
     --text-second-color: #afafaf;
+    --success-color: #1F9500FF;
+    --danger-color: #ffa500;
 }
 
 body::-webkit-scrollbar {
@@ -39,7 +41,8 @@ body::-webkit-scrollbar-thumb {
 }
 /* ----------------------- */
 body {
-    background: url("../source/Background.png") no-repeat -450px -50px;
+    background: url("../source/Background.png") no-repeat 0 0 fixed;
+    background-size: cover;
 }
 
 blockquote {
@@ -227,6 +230,10 @@ blockquote {
 }
 .post__short-info {
     padding: 40px;
+    overflow: hidden;
+}
+.post__short-info img {
+    max-width: 755px;
 }
 .post__category {
     font-size: 1.5em;
@@ -325,6 +332,11 @@ blockquote {
 }
 .categories__item:hover {
     background: var(--accent-color);
+}
+.flash--category-tags {
+    padding: 20px;
+    color: #fff;
+    background: var(--danger-color);
 }
 
 /* login */
@@ -497,13 +509,14 @@ label {
 }
 
 .flash-comment {
-    margin-bottom: 10px;
+    margin-top: 10px;
     padding: 20px;
     color: #fff;
     background: var(--success-color);
 }
 
 .form-comment {
+    margin-top: 10px;
     background: var(--frame-color);
     padding: 40px;
 }

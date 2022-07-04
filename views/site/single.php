@@ -5,8 +5,11 @@
 /** @var app\controllers\SiteController $tags */
 /** @var app\controllers\SiteController $comments */
 /** @var app\controllers\SiteController $commentForm */
+/** @var app\controllers\SiteController $pagination */
 
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
+
 
 $this->title = $article->title;
 ?>
@@ -58,6 +61,12 @@ $this->title = $article->title;
             </section>
         <?php endforeach; ?>
     <?php endif; ?>
+
+    <?php
+    echo LinkPager::widget([
+        'pagination' => $pagination,
+    ])
+    ?>
 
     <?= $this->render('/partials/commentForm', [
         'article' => $article,

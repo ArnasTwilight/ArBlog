@@ -53,4 +53,9 @@ class Tag extends ActiveRecord
     {
         return $this->hasMany(ArticleTag::className(), ['tag_id' => 'id']);
     }
+
+    public static function getAll()
+    {
+        return Tag::find()->orderBy('id desc')->all();
+    }
 }

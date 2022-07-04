@@ -81,7 +81,7 @@ class SiteController extends Controller
         return $this->render('index', [
             'recent' => $recent,
             'popular' => $popular,
-            'articles' => $data['articles'],
+            'articles' => $data['element'],
             'pagination' => $data['pagination'],
             'asideCategories' => $asideCategories,
         ]);
@@ -117,33 +117,33 @@ class SiteController extends Controller
 
     public function actionView($id)
     {
-        if (!empty(Article::findOne($id)))
-        {
+        if (!empty(Article::findOne($id))) {
             $article = Article::findOne($id);
             $tags = $article->getSelectedTags('title');
             $article->viewedCounter();
-            $comments = $article->getArticleComments();
+            $comments = $article->getArticleComments($id, 5);
             $commentForm = new CommentForm();
         } else {
             return $this->redirect('error');
         }
 
+
         return $this->render('single', [
             'tags' => $tags,
             'article' => $article,
-            'comments' => $comments,
+            'comments' => $comments['element'],
+            'pagination' => $comments['pagination'],
             'commentForm' => $commentForm,
         ]);
     }
 
     public function actionCategory($id)
     {
-        if (!empty(Category::findOne($id)))
-        {
+        if (!empty(Category::findOne($id))) {
             $category = Category::findOne($id);
             $data = Article::getAllPostCategory($category['id'], self::PAGE_SIZE);
 
-            if (empty($data['articles'])){
+            if (empty($data['articles'])) {
                 $emptyCategory = Article::nonePostInCategory($category['title']);
             }
         } else {
@@ -152,7 +152,7 @@ class SiteController extends Controller
 
         return $this->render('category', [
             'category' => $category,
-            'articles' => $data['articles'],
+            'articles' => $data['element'],
             'pagination' => $data['pagination'],
             'emptyCategory' => $emptyCategory,
         ]);
@@ -160,6 +160,10 @@ class SiteController extends Controller
 
     public function actionCategories()
     {
+        if (empty(Category::getAll())) {
+            Yii::$app->getSession()->setFlash('categories', 'No categories!');
+        }
+
         $categories = Category::getAll();
 
         return $this->render('categories', [
@@ -175,14 +179,25 @@ class SiteController extends Controller
 
         $model = new CommentForm();
 
-        if (Yii::$app->request->isPost)
-        {
+        if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
-            if ($model->saveComment($id))
-            {
+            if ($model->saveComment($id)) {
                 Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
                 return $this->redirect(['site/view', 'id' => $id]);
             }
         }
+    }
+
+    public function actionTags()
+    {
+        if (empty(Tag::getAll())) {
+            Yii::$app->getSession()->setFlash('tags', 'No tags!');
+        }
+
+        $tags = Tag::getAll();
+
+        return $this->render('tags', [
+            'tags' => $tags,
+        ]);
     }
 }

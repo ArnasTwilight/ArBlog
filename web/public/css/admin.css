@@ -59,13 +59,6 @@ a:hover {
     padding: 40px;
 }
 
-.aside-nav__title {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px;
-    white-space: pre;
-}
-
 .aside-menu {
     background: #FFFFFF;
 }
@@ -100,6 +93,12 @@ a:hover {
     width: 32px;
     height: 32px;
     background:url("../source/icon/files.svg") no-repeat;
+    background-size: cover;
+}
+.comment-icon {
+    width: 32px;
+    height: 32px;
+    background:url("../source/icon/file-text.svg") no-repeat;
     background-size: cover;
 }
 .user-icon {

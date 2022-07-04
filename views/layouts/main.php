@@ -33,6 +33,7 @@ PublicAsset::register($this);
                 <li class="logo"><a href="/"></a></li>
                 <li class="header-nav__item"><a href="<?= Url::toRoute('/')?>">Home</a></li>
                 <li class="header-nav__item"><a href="<?= Url::toRoute('/site/categories')?>">Category</a></li>
+                <li class="header-nav__item"><a href="<?= Url::toRoute('/site/tags')?>">Tag</a></li>
                 <li class="header-nav__item"><a href="<?= Url::toRoute('/site/about')?>">About us</a></li>
             </ul>
         </nav>
