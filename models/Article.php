@@ -194,4 +194,8 @@ class Article extends ActiveRecord
 
         return $data;
     }
+
+    public function getArticleComments(){
+        return $this->getComments()->where(['status' => 1])->all();
+    }
 }

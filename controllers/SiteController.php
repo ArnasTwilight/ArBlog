@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Article;
 use app\models\ArticleTag;
 use app\models\Category;
+use app\models\Comment;
+use app\models\CommentForm;
 use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
@@ -72,7 +74,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $data = Article::getAll(self::PAGE_SIZE);
-
         $recent = Article::getRecent(self::RECENT_ASIDE_POST_NUMBER);
         $popular = Article::getPopular(self::POPULAR_ASIDE_POST_NUMBER);
         $asideCategories = Category::getAsideCategory(self::CATEGORIES_ASIDE_NUMBER);
@@ -121,6 +122,8 @@ class SiteController extends Controller
             $article = Article::findOne($id);
             $tags = $article->getSelectedTags('title');
             $article->viewedCounter();
+            $comments = $article->getArticleComments();
+            $commentForm = new CommentForm();
         } else {
             return $this->redirect('error');
         }
@@ -128,6 +131,8 @@ class SiteController extends Controller
         return $this->render('single', [
             'tags' => $tags,
             'article' => $article,
+            'comments' => $comments,
+            'commentForm' => $commentForm,
         ]);
     }
 
@@ -160,5 +165,24 @@ class SiteController extends Controller
         return $this->render('categories', [
             'categories' => $categories,
         ]);
+    }
+
+    public function actionComment($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new CommentForm();
+
+        if (Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if ($model->saveComment($id))
+            {
+                Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
+                return $this->redirect(['site/view', 'id' => $id]);
+            }
+        }
     }
 }

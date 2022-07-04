@@ -39,6 +39,7 @@ class Comment extends ActiveRecord
             [['date'], 'safe'],
             [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['article_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['date'], 'default', 'value' => date('Y-m-d H:i:s')],
         ];
     }
 
@@ -75,5 +76,21 @@ class Comment extends ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getDate() {
+        return Yii::$app->formatter->asDatetime($this->date);
+    }
+
+    public function allow()
+    {
+        $this->status = 1;
+        return $this->save(false);
+    }
+
+    public function disallow()
+    {
+        $this->status = 0;
+        return $this->save(false);
     }
 }

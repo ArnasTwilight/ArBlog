@@ -4,6 +4,7 @@
 /** @var string $content */
 
 use app\assets\AdminAsset;
+use app\modules\admin\controllers\DefaultController;
 use app\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
@@ -27,7 +28,16 @@ AdminAsset::register($this);
 
 <aside class="aside-menu aside-menu--grid">
     <nav class="aside-nav">
-        <h1 class="aside-nav__title">Admin<br>Panel</h1>
+
+        <div class="user-profile">
+            <img class="user-image" src="<?= DefaultController::getAdmin()->getImage(DefaultController::getAdmin()->id) ?>" alt="avatar">
+            <div class="user-info">
+                <p class="user-info__name"><?= DefaultController::getAdmin()->name ?></p>
+                <p class="user-info__email"><?= DefaultController::getAdmin()->email ?></p>
+            </div>
+        </div>
+
+<!--        <h1 class="aside-nav__title">Admin<br>Panel</h1>-->
         <ul class="aside-nav__list">
 
             <li class="aside-nav__item">
@@ -38,6 +48,9 @@ AdminAsset::register($this);
             </li>
             <li class="aside-nav__item">
                 <div class="article-icon"></div><a href="/admin/article">Article</a>
+            </li>
+            <li class="aside-nav__item">
+                <div class="article-icon"></div><a href="/admin/comment">Comment</a>
             </li>
             <li class="aside-nav__item">
                 <div class="user-icon"></div><a href="/admin/user">User</a>

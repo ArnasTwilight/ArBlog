@@ -113,10 +113,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function getImage($id) {
         return ($this->image) ? '/uploads/user/' . $id . '/' . $this->image : '/uploads/user/no_avatar/no-avatar.jpg';
     }
+
     public function saveImage($filename) {
         $this->image = $filename;
         return $this->save(false);
     }
+
     public function deleteImage($filename, $dirName, $idUser)
     {
         if (Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $idUser . '/' . $filename)

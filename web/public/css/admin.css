@@ -75,12 +75,12 @@ a:hover {
     padding: 10px;
     margin-bottom: 10px;
 }
-.aside-nav__item > a {
+.aside-nav__item a {
     font-size: 1.5em;
     line-height: 30px;
     margin-left: 20px;
 }
-.aside-nav__item > a:hover {
+.aside-nav__item a:hover {
     color: var(--accent-dark-color);
 }
 
@@ -130,14 +130,34 @@ a:hover {
 .active:hover {
     background: var(--accent-dark-color);
 }
-.active > a{
+.active a{
     color: #FFFFFF;
 }
-.active > a:hover {
+.active a:hover {
     color: #FFFFFF;
 }
-.active > div {
+.active div {
     -webkit-filter: invert(100%);
+}
+
+.user-profile {
+    display: flex;
+    margin-bottom: 20px;
+}
+.user-image {
+    width: 96px;
+    height: 96px;
+    margin-right: 20px;
+}
+.user-info {
+    border-left: 1px solid var(--gray-color);
+    padding-left: 20px;
+}
+.user-info__name {
+    font-size: 1.25em;
+}
+.user-info__email {
+    font-size: 1.10em;
 }
 
 /*  header  */
@@ -166,7 +186,7 @@ a:hover {
 .header-nav__item {
     margin-right: 40px;
 }
-.header-nav__item > a {
+.header-nav__item a {
     line-height: 30px;
 }
 

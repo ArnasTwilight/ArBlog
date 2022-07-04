@@ -3,6 +3,8 @@
 /** @var yii\web\View $this */
 /** @var app\controllers\SiteController $article */
 /** @var app\controllers\SiteController $tags */
+/** @var app\controllers\SiteController $comments */
+/** @var app\controllers\SiteController $commentForm */
 
 use yii\helpers\Url;
 
@@ -43,4 +45,24 @@ $this->title = $article->title;
                 </div>
             </div>
         </article>
+
+    <?php if (!empty($comments)): ?>
+        <?php foreach ($comments as $comment): ?>
+            <section class="comment">
+                <div class="user__info">
+                    <img class="comment__user-img" src="<?= $comment->user->getImage($comment->user->id) ?>" alt="avatar">
+                    <h4 class="comment__user-name"><?= $comment->user->name ?></h4>
+                    <p class="comment__date"><?= $comment->getDate() ?></p>
+                </div>
+                <p class="comment__text"><?= $comment->text ?></p>
+            </section>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?= $this->render('/partials/commentForm', [
+        'article' => $article,
+        'comments' => $comments,
+        'commentForm' => $commentForm,
+    ])?>
+
 </main>

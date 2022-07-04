@@ -6,6 +6,7 @@ use app\models\Article;
 use app\models\Category;
 use app\models\Tag;
 use app\models\User;
+use Yii;
 use yii\web\Controller;
 
 /**
@@ -30,5 +31,17 @@ class DefaultController extends Controller
             'categories' => $categories,
             'tags' => $tags,
         ]);
+    }
+
+    public static function getAdmin()
+    {
+        $admin = User::findOne(Yii::$app->user->identity->id);
+        unset($admin['password']);
+
+//        echo '<pre>';
+//        var_dump($admin->getImage($admin->id));
+//        echo '</pre>'; die;
+
+        return $admin;
     }
 }

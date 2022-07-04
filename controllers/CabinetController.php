@@ -67,6 +67,7 @@ class CabinetController extends Controller
     {
         $this->accessControl($id);
 
+        $this->actionDeleteImage($id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['/']);
