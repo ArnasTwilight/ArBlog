@@ -158,15 +158,20 @@ class Article extends ActiveRecord
             }
         }
     }
+    public function saveCategory ($category)
+    {
+        $category = Category::findOne($category);
+        $this->link('category', $category);
+    }
 
     public function clearCurrentTags()
     {
         ArticleTag::deleteAll(['article_id' => $this->id]);
     }
 
-    public function getImage($id)
+    public function getImage()
     {
-        return ($this->image) ? '/uploads/article/' . $id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
+        return ($this->image) ? '/uploads/article/' . $this->id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
     }
 
     public function getDate()

@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\Article;
 use app\models\ArticleSearch;
+use app\models\Category;
 use app\models\ImageUpload;
 use app\models\Tag;
 use Yii;
@@ -177,7 +178,21 @@ class ArticleController extends Controller
 
     public function actionSetCategory($id)
     {
-        return $this->render('category', []);
+        $article = $this->findModel($id);
+        $selectedCategory = $article->category->id;
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
+
+        if ($this->request->isPost)
+        {
+            $category = Yii::$app->request->post('category');
+            $article->saveCategory($category);
+            return $this->redirect(['view', 'id' => $article->id]);
+        }
+
+        return $this->render('category', [
+            'selectedCategory'=> $selectedCategory,
+            'categories' => $categories,
+        ]);
     }
 
     
