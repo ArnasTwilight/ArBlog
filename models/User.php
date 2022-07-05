@@ -121,11 +121,11 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
-    public function deleteImage($filename, $dirName, $idUser)
+    public function deleteImage($dirName)
     {
-        if (Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $idUser . '/' . $filename)
+        if (Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $this->id . '/' . $this->image)
         {
-            unlink(Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $idUser . '/' . $filename);
+            unlink(Yii::getAlias('@web') . 'uploads/' . $dirName . '/'. $this->id . '/' . $this->image);
 
             $this->image = '';
 

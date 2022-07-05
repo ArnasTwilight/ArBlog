@@ -99,7 +99,7 @@ class CabinetController extends Controller
             $user = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
 
-            $user->saveImage($model->uploadFile($file, $user->image, $this->dirUpload, $id));
+            $user->saveImage($model->uploadFile($file, $user->image, $this->dirUpload, $id, 128,128));
 
             return $this->redirect(['/cabinet', 'id' => $id]);
         }
@@ -114,7 +114,7 @@ class CabinetController extends Controller
         $this->accessControl($id);
 
         $user = $this->findModel($id);
-        $user->deleteImage($user->image, $this->dirUpload, $id);
+        $user->deleteImage($this->dirUpload);
 
         return $this->redirect(['/cabinet', 'id' => $id]);
     }

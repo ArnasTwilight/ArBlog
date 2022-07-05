@@ -148,7 +148,7 @@ class ArticleController extends Controller
             $article = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
 
-            $article->saveImage($model->uploadFile($file, $article->image, $this->dirUpload, $id));
+            $article->saveImage($model->uploadFile($file, $article->image, $this->dirUpload, $id, 835, 440));
         }
 
         return $this->render('image', [
@@ -177,9 +177,7 @@ class ArticleController extends Controller
 
     public function actionSetCategory($id)
     {
-
-        return $this->render('category', [
-        ]);
+        return $this->render('category', []);
     }
 
     

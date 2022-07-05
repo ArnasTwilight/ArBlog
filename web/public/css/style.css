@@ -162,6 +162,8 @@ blockquote {
     color: var(--accent-color);
 }
 .aside-menu__img {
+    max-width: 225px;
+    max-height: 120px;
     position: relative;
     overflow: hidden;
 }
@@ -209,6 +211,8 @@ blockquote {
     margin-bottom: 40px;
 }
 .post__img {
+    max-width: 835px;
+    height: 440px;
     position: relative;
     overflow: hidden;
 }
@@ -429,8 +433,8 @@ label {
     display: flex;
 }
 .cabinet img {
-    width: 128px;
-    height: 128px;
+    max-width: 128px;
+    max-height: 128px;
 }
 .user-info {
     margin-left: 20px;
@@ -502,8 +506,8 @@ label {
 .comment__user-img {
     display: block;
     margin: 0 auto;
-    width: 96px;
-    height: 96px;
+    max-width: 96px;
+    max-height: 96px;
 }
 .comment__user-name {
     text-align: center;

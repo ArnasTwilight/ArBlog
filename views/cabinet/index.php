@@ -12,7 +12,9 @@ $this->title = 'Cabinet: ' . $user->login;
 <main class="main grid--main cabinet">
 
     <section class="cabinet-user">
-        <img src="<?= $user->getImage($user->id) ?>" alt="avatar">
+        <div>
+            <img src="<?= $user->getImage($user->id) ?>" alt="avatar">
+        </div>
         <ul class="user-info">
             <li class="user-info__item">Name: <?= $user->name ?></li>
             <li class="user-info__item">Login: <?= $user->login ?></li>
