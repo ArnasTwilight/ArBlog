@@ -1,14 +1,14 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var app\controllers\SiteController $category */
+/** @var app\controllers\SiteController $tag */
 /** @var app\controllers\SiteController $articles */
-/** @var app\controllers\SiteController $pagination */
+/** @var app\controllers\SiteController $emptyCategory */
 
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
-$this->title = $category->title;
+$this->title = $tag->title;
 ?>
 
 <?= $this->render('/partials/sidebar', [
@@ -19,9 +19,13 @@ $this->title = $category->title;
 
 <main class="main grid--main">
 
-    <?php if(Yii::$app->session->getFlash('category-no-post')): ?>
+    <article class="info-tag">
+        <p>Tag posts: <?= $tag->title ?></p>
+    </article>
+
+    <?php if(Yii::$app->session->getFlash('tag-no-post')): ?>
         <li class="flash--category-tags">
-            <?= Yii::$app->session->getFlash('category-no-post') ?>
+            <?= Yii::$app->session->getFlash('tag-no-post') ?>
         </li>
     <?php endif; ?>
 
@@ -48,7 +52,7 @@ $this->title = $category->title;
             </div>
         </article>
     <?php endforeach; ?>
-
+    <?= $emptyCategory ?>
     <?php
     echo LinkPager::widget([
         'pagination' => $pagination,

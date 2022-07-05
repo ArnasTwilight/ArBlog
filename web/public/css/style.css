@@ -310,6 +310,18 @@ blockquote {
     background: var(--accent-color);
     color: #FFFFFF;
 }
+.info-tag {
+    background-color: var(--frame-color);
+    color: var(--text-color);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* error */
+.error-block {
+    background-color: var(--frame-color);
+    padding: 40px;
+}
 
 /* categories */
 .categories {
@@ -372,12 +384,6 @@ label {
 }
 .btn:hover {
     background: var(--accent-dark-color);
-}
-
-/* error */
-.error-block {
-    background-color: var(--frame-color);
-    padding: 40px;
 }
 
 /* pagination */

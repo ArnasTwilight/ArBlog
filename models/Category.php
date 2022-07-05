@@ -27,7 +27,7 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 255],
+            [['title'], 'string', 'min' => 2, 'max' => 255],
         ];
     }
 

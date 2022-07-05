@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\data\Pagination;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
@@ -45,7 +44,8 @@ class Article extends ActiveRecord
             [['date'], 'default', 'value' => date('Y-m-d H:i:s')],
             [['viewed', 'status', 'user_id', 'category_id'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
-            ['title', 'required'],
+            [['title', 'description'], 'string', 'min' => 1, 'max' => 255],
+            [['title', 'content', 'description'], 'required'],
         ];
     }
 
@@ -83,15 +83,18 @@ class Article extends ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getComments(){
+    public function getComments()
+    {
         return $this->hasMany(Comment::className(), ['article_id' => 'id']);
     }
 
-    public static function getRecent($number = 3) {
+    public static function getRecent($number = 3)
+    {
         return Article::find()->orderBy('date desc')->limit($number)->all();
     }
 
-    public static function getPopular($number = 3) {
+    public static function getPopular($number = 3)
+    {
         return Article::find()->orderBy('viewed desc')->limit($number)->all();
     }
 
@@ -100,7 +103,7 @@ class Article extends ActiveRecord
         $query = Article::find();
         $count = $query->count();
 
-        $data = Article::getPagination($query, $count, $pageSize);
+        $data = PaginationSite::getPagination($query, $count, $pageSize);
 
         return $data;
     }
@@ -110,39 +113,32 @@ class Article extends ActiveRecord
         $query = Article::find()->where(['category_id' => intval($categoryId)]);
         $count = $query->count();
 
-        $data = Article::getPagination($query, $count, $pageSize);
+        $data = PaginationSite::getPagination($query, $count, $pageSize);
 
         return $data;
     }
 
-    private static function getPagination ($query, $count, $pageSize, $sort = 'desc')
+    public function getCategory()
     {
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
-
-        $articles = $query->offset($pagination->offset)
-            ->orderBy('date ' . $sort)
-            ->limit($pagination->limit)
-            ->all();
-
-        $data['element'] = $articles;
-        $data['pagination'] = $pagination;
-
-        return $data;
-    }
-
-    public function getCategory() {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
-    public function getTags() {
+    public function getTags()
+    {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
             ->viaTable('article_tag', ['article_id' => 'id']);
     }
 
     public function getSelectedTags($element = 'id')
     {
-        $selectedIds = $this->getTags()->select($element)->asArray()->all();
-        return ArrayHelper::getColumn($selectedIds, $element);
+        if ($element === 'all')
+        {
+            $selected = $this->getTags()->all();
+            return $selected;
+        }
+
+        $selected = $this->getTags()->select($element)->asArray()->all();
+        return ArrayHelper::getColumn($selected, $element);
     }
 
     public function saveImage($filename)
@@ -153,45 +149,35 @@ class Article extends ActiveRecord
 
     public function saveTags($tags)
     {
-        if(is_array($tags))
-        {
+        if (is_array($tags)) {
             $this->clearCurrentTags();
 
-            foreach ($tags as $tag_id)
-            {
+            foreach ($tags as $tag_id) {
                 $tag = Tag::findOne($tag_id);
                 $this->link('tags', $tag);
             }
         }
     }
 
-    public function clearCurrentTags(){
+    public function clearCurrentTags()
+    {
         ArticleTag::deleteAll(['article_id' => $this->id]);
     }
 
-    public function getImage($id) {
+    public function getImage($id)
+    {
         return ($this->image) ? '/uploads/article/' . $id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
     }
 
-    public function getDate() {
+    public function getDate()
+    {
         return Yii::$app->formatter->asDatetime($this->date);
     }
 
-    public function viewedCounter () {
+    public function viewedCounter()
+    {
         $this->viewed += 1;
         return $this->save(false);
-    }
-
-    public static function nonePostInCategory ($categoryName)
-    {
-        $error = '
-         <div class="error-block">
-            <div>
-                <p>No posts in '. $categoryName .' category</p>
-            </div>
-        </div>';
-
-        return $error;
     }
 
     public function getArticleComments($id, $pageSize = 5)
@@ -199,7 +185,7 @@ class Article extends ActiveRecord
         $query = Comment::find()->where(['status' => 1, 'article_id' => $id]);
         $count = $query->count();
 
-        $data = Article::getPagination($query, $count, $pageSize);
+        $data = PaginationSite::getPagination($query, $count, $pageSize);
 
         return $data;
     }

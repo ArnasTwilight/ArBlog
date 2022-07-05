@@ -62,9 +62,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['isAdmin'], 'integer'],
-            [['about'], 'string'],
+            [['about'], 'string', 'max' => 255],
             [['name', 'email', 'login', 'password', 'image'], 'string', 'max' => 255],
+            [['name', 'login',], 'string','min' => 2, 'max' => 255],
             ['email', 'unique', 'message' => 'This email address has already been taken.'],
+            ['login', 'unique', 'message' => 'This login has already been taken.'],
         ];
     }
 

@@ -74,7 +74,7 @@ AdminAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site']],
             ['label' => 'Category', 'url' => ['/site/categories']],
-            ['label' => 'About us', 'url' => ['/site/about']],
+//            ['label' => 'About us', 'url' => ['/site/about']],
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

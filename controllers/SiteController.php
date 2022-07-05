@@ -3,18 +3,14 @@
 namespace app\controllers;
 
 use app\models\Article;
-use app\models\ArticleTag;
 use app\models\Category;
-use app\models\Comment;
 use app\models\CommentForm;
 use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
@@ -110,23 +106,24 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+//    public function actionAbout()
+//    {
+//        return $this->render('about');
+//    }
 
     public function actionView($id)
     {
-        if (!empty(Article::findOne($id))) {
-            $article = Article::findOne($id);
-            $tags = $article->getSelectedTags('title');
-            $article->viewedCounter();
-            $comments = $article->getArticleComments($id, 5);
-            $commentForm = new CommentForm();
-        } else {
+        if (empty(Article::findOne($id)))
+        {
             return $this->redirect('error');
         }
 
+        $article = Article::findOne($id);
+        $tags = $article->getSelectedTags('all');
+
+        $article->viewedCounter();
+        $comments = $article->getArticleComments($id, 5);
+        $commentForm = new CommentForm();
 
         return $this->render('single', [
             'tags' => $tags,
@@ -139,22 +136,22 @@ class SiteController extends Controller
 
     public function actionCategory($id)
     {
-        if (!empty(Category::findOne($id))) {
-            $category = Category::findOne($id);
-            $data = Article::getAllPostCategory($category['id'], self::PAGE_SIZE);
-
-            if (empty($data['articles'])) {
-                $emptyCategory = Article::nonePostInCategory($category['title']);
-            }
-        } else {
+        if (empty(Category::findOne($id))) {
             return $this->redirect('error');
         }
+
+        $category = Category::findOne($id);
+        $data = Article::getAllPostCategory($category['id'], self::PAGE_SIZE);
+
+        if (empty($data['element'])) {
+            Yii::$app->getSession()->setFlash('category-no-post', 'No post in: ' . $category->title);
+        }
+
 
         return $this->render('category', [
             'category' => $category,
             'articles' => $data['element'],
             'pagination' => $data['pagination'],
-            'emptyCategory' => $emptyCategory,
         ]);
     }
 
@@ -198,6 +195,26 @@ class SiteController extends Controller
 
         return $this->render('tags', [
             'tags' => $tags,
+        ]);
+    }
+
+    public function actionTag($id)
+    {
+        if (empty(Tag::findOne($id))){
+            return $this->redirect('error');
+        }
+
+        $tag = Tag::findOne($id);
+        $data = $tag->getSelectedTags();
+
+        if (empty($data['element'])) {
+            Yii::$app->getSession()->setFlash('tag-no-post', 'No post in: ' . $tag->title);
+        }
+
+        return $this->render('tag', [
+            'tag' => $tag,
+            'articles' => $data['element'],
+            'pagination' => $data['pagination'],
         ]);
     }
 }

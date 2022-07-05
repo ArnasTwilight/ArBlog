@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -29,7 +28,7 @@ class Tag extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 255],
+            [['title'], 'string', 'min' => 2, 'max' => 255],
         ];
     }
 
@@ -57,5 +56,21 @@ class Tag extends ActiveRecord
     public static function getAll()
     {
         return Tag::find()->orderBy('id desc')->all();
+    }
+
+    public function getArticles()
+    {
+        return $this->hasMany(Article::className(), ['id' => 'article_id'])
+            ->viaTable('article_tag', ['tag_id' => 'id']);
+    }
+
+    public function getSelectedTags()
+    {
+        $query = $this->getArticles();
+        $count = $query->count();
+
+        $data = PaginationSite::getPagination($query, $count, 3);
+
+        return $data;
     }
 }
