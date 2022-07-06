@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use app\models\Article;
 use app\models\ArticleSearch;
 use app\models\Category;
+use app\models\DeleteImage;
 use app\models\ImageUpload;
 use app\models\Tag;
 use Yii;
@@ -19,8 +20,6 @@ use yii\web\UploadedFile;
  */
 class ArticleController extends Controller
 {
-    private $dirUpload = 'article';
-
     /**
      * @inheritDoc
      */
@@ -119,7 +118,13 @@ class ArticleController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        $deleteImage = new DeleteImage();
+        $deleteImage->deleteImage($model, $this->getDirUpload());
+        $deleteImage->deleteDirImage($model, $this->getDirUpload());
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }
@@ -149,7 +154,7 @@ class ArticleController extends Controller
             $article = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
 
-            $article->saveImage($model->uploadFile($file, $article->image, $this->dirUpload, $id, 835, 440));
+            $article->saveImage($model->uploadFile($file, $article->image, $this->getDirUpload(), $id, 1035, 640));
 
             return $this->redirect(['view', 'id' => $article->id]);
         }
@@ -198,5 +203,16 @@ class ArticleController extends Controller
         ]);
     }
 
-    
+    public function actionDeleteImage($id)
+    {
+        $article = $this->findModel($id);
+        $article->deleteImage();
+
+        return $this->redirect(['view', 'id' => $article->id]);
+    }
+
+    private function getDirUpload()
+    {
+        return Yii::$app->params['article.dirImage'];
+    }
 }

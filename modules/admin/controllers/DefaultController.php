@@ -38,10 +38,6 @@ class DefaultController extends Controller
         $admin = User::findOne(Yii::$app->user->identity->id);
         unset($admin['password']);
 
-//        echo '<pre>';
-//        var_dump($admin->getImage($admin->id));
-//        echo '</pre>'; die;
-
         return $admin;
     }
 }

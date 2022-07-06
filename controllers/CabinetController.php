@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\DeleteImage;
 use app\models\ImageUpload;
 use app\models\NewPassword;
 use app\models\User;
@@ -12,7 +13,6 @@ use yii\web\UploadedFile;
 
 class CabinetController extends Controller
 {
-    private $dirUpload = 'user';
 
     public function actionIndex($id)
     {
@@ -65,10 +65,13 @@ class CabinetController extends Controller
     {
         $this->accessControl($id);
 
-        $user = $this->findModel($id);
+        $model = $this->findModel($id);
 
-        $user->deleteImage($this->dirUpload);
-        $user->delete();
+        $deleteImage = new DeleteImage();
+        $deleteImage->deleteImage($model, $this->getDirUpload());
+        $deleteImage->deleteDirImage($model, $this->getDirUpload());
+
+        $model->delete();
 
         return $this->redirect(['/']);
     }
@@ -99,7 +102,7 @@ class CabinetController extends Controller
             $user = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
 
-            $user->saveImage($model->uploadFile($file, $user->image, $this->dirUpload, $id, 128,128));
+            $user->saveImage($model->uploadFile($file, $user->image, $this->getDirUpload(), $id, 128,128));
 
             return $this->redirect(['/cabinet', 'id' => $id]);
         }
@@ -114,7 +117,7 @@ class CabinetController extends Controller
         $this->accessControl($id);
 
         $user = $this->findModel($id);
-        $user->deleteImage($this->dirUpload);
+        $user->deleteImage();
 
         return $this->redirect(['/cabinet', 'id' => $id]);
     }
@@ -156,5 +159,10 @@ class CabinetController extends Controller
         {
             return $this->redirect(['/cabinet', 'id' => Yii::$app->user->identity->id]);
         }
+    }
+
+    private function getDirUpload()
+    {
+        return Yii::$app->params['user.dirImage'];
     }
 }

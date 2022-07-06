@@ -131,8 +131,7 @@ class Article extends ActiveRecord
 
     public function getSelectedTags($element = 'id')
     {
-        if ($element === 'all')
-        {
+        if ($element === 'all') {
             $selected = $this->getTags()->all();
             return $selected;
         }
@@ -158,7 +157,8 @@ class Article extends ActiveRecord
             }
         }
     }
-    public function saveCategory ($category)
+
+    public function saveCategory($category)
     {
         $category = Category::findOne($category);
         $this->link('category', $category);
@@ -171,7 +171,7 @@ class Article extends ActiveRecord
 
     public function getImage()
     {
-        return ($this->image) ? '/uploads/article/' . $this->id . '/' . $this->image : '/uploads/article/no_image/no-image.jpg';
+        return ($this->image) ? '/uploads/' . Yii::$app->params['article.dirImage'] . '/' . $this->id . '/' . $this->image : Yii::$app->params['article.NoImage'];
     }
 
     public function getDate()

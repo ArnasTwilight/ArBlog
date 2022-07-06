@@ -113,31 +113,12 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public function getImage() {
-        return ($this->image) ? '/uploads/user/' . $this->id . '/' . $this->image : '/uploads/user/no_avatar/no-avatar.jpg';
+        return ($this->image) ? '/uploads/'. Yii::$app->params['user.dirImage'] . '/' . $this->id . '/' . $this->image : Yii::$app->params['user.NoImage'];
     }
 
     public function saveImage($filename) {
         $this->image = $filename;
         return $this->save(false);
-    }
-
-    public function deleteImage($dirName)
-    {
-        if (!(count(scandir($this->getDirImage($dirName))) == 2)) {
-            if (file_exists($this->getDirImage($dirName) . '/' . $this->image)) {
-                unlink($this->getDirImage($dirName) . '/' . $this->image);
-
-                $this->image = '';
-
-                $this->save(false);
-            }
-        }
-        return true;
-    }
-
-    private function getDirImage ($dirName)
-    {
-        return Yii::getAlias('@web') . 'uploads/' . $dirName . '/' . $this->id;
     }
 }
 

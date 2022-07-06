@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\DeleteImage;
 use app\models\ImageUpload;
 use app\models\User;
 use app\models\UserSearchs;
@@ -94,7 +95,10 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->deleteImage('user');
+        $deleteImage = new DeleteImage();
+        $deleteImage->deleteImage($model, $this->getDirUpload());
+        $deleteImage->deleteDirImage($model, $this->getDirUpload());
+
         $model->delete();
 
         return $this->redirect(['index']);
@@ -125,7 +129,7 @@ class UserController extends Controller
             $user = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
 
-            $user->saveImage($model->uploadFile($file, $user->image, 'user', $id, 128,128));
+            $user->saveImage($model->uploadFile($file, $user->image, $this->getDirUpload(), $id, 128,128));
 
             return $this->redirect(['view', 'id' => $user->id]);
         }
@@ -138,8 +142,13 @@ class UserController extends Controller
     public function actionDeleteImage($id)
     {
         $user = $this->findModel($id);
-        $user->deleteImage('user');
+        $user->deleteImage();
 
         return $this->redirect(['view', 'id' => $user->id]);
+    }
+
+    private function getDirUpload()
+    {
+        return Yii::$app->params['user.dirImage'];
     }
 }
