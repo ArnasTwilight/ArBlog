@@ -22,6 +22,7 @@ $this->title = 'Cabinet: ' . $user->login;
             <li class="user-info__item">About: <?= $user->about ?></li>
             <li><?= Html::a('Set avatar', ['set-image', 'id' => $model->id], ['class' => 'btn user-btn']) ?></li>
             <li><?= Html::a('Update profile', ['update', 'id' => $model->id], ['class' => 'btn user-btn']) ?></li>
+            <li><?= Html::a('New password', ['new-password', 'id' => $model->id], ['class' => 'btn user-btn warning']) ?></li>
             <?php if (!empty($user->image)):?>
                 <li><?= Html::a('Delete avatar', ['delete-image', 'id' => $model->id], ['class' => 'btn user-btn warning']) ?></li>
             <?php endif; ?>

@@ -3,13 +3,11 @@
 namespace app\controllers;
 
 use app\models\ImageUpload;
-use app\models\LoginForm;
-use app\models\SignupForm;
+use app\models\NewPassword;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
 use yii\web\UploadedFile;
 
 class CabinetController extends Controller
@@ -67,8 +65,10 @@ class CabinetController extends Controller
     {
         $this->accessControl($id);
 
-        $this->actionDeleteImage($id);
-        $this->findModel($id)->delete();
+        $user = $this->findModel($id);
+
+        $user->deleteImage($this->dirUpload);
+        $user->delete();
 
         return $this->redirect(['/']);
     }
@@ -117,6 +117,28 @@ class CabinetController extends Controller
         $user->deleteImage($this->dirUpload);
 
         return $this->redirect(['/cabinet', 'id' => $id]);
+    }
+
+    public function actionNewPassword($id)
+    {
+        $this->accessControl($id);
+
+        $model = new NewPassword;
+
+        if (Yii::$app->request->isPost) {
+
+            $user = $this->findModel($id);
+            $model->load(Yii::$app->request->post());
+
+            if ($model->setNewPassword($user))
+            {
+                return $this->redirect(['/cabinet', 'id' => $id]);
+            }
+        }
+
+        return $this->render('password', [
+            'model' => $model,
+        ]);
     }
 
     private function userIsGuest ()
