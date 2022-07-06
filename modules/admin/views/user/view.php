@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Set Image', ['set-image', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Delete Image', ['delete-image', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -33,6 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'email:email',
             'login',
+            [
+                'format' => 'html',
+                'label' => 'Avatar',
+                'value' => function ($data) {
+                    return Html::img($data->getImage(), ['width' => 128]);
+                }
+            ],
             'image',
             'isAdmin',
             'about:ntext',

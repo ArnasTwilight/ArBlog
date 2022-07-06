@@ -144,8 +144,8 @@ a:hover {
     margin-bottom: 20px;
 }
 .user-image {
-    width: 96px;
-    height: 96px;
+    max-width: 96px;
+    max-height: 96px;
     margin-right: 20px;
 }
 .user-info {

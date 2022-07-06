@@ -2,11 +2,14 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\ImageUpload;
 use app\models\User;
 use app\models\UserSearchs;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -111,5 +114,32 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionSetImage($id)
+    {
+        $model = new ImageUpload;
+
+        if (Yii::$app->request->isPost)
+        {
+            $user = $this->findModel($id);
+            $file = UploadedFile::getInstance($model, 'image');
+
+            $user->saveImage($model->uploadFile($file, $user->image, 'user', $id, 128,128));
+
+            return $this->redirect(['view', 'id' => $user->id]);
+        }
+
+        return $this->render('image', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionDeleteImage($id)
+    {
+        $user = $this->findModel($id);
+        $user->deleteImage('user');
+
+        return $this->redirect(['view', 'id' => $user->id]);
     }
 }

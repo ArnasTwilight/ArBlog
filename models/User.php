@@ -112,8 +112,8 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
-    public function getImage($id) {
-        return ($this->image) ? '/uploads/user/' . $id . '/' . $this->image : '/uploads/user/no_avatar/no-avatar.jpg';
+    public function getImage() {
+        return ($this->image) ? '/uploads/user/' . $this->id . '/' . $this->image : '/uploads/user/no_avatar/no-avatar.jpg';
     }
 
     public function saveImage($filename) {

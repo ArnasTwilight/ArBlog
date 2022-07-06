@@ -150,6 +150,8 @@ class ArticleController extends Controller
             $file = UploadedFile::getInstance($model, 'image');
 
             $article->saveImage($model->uploadFile($file, $article->image, $this->dirUpload, $id, 835, 440));
+
+            return $this->redirect(['view', 'id' => $article->id]);
         }
 
         return $this->render('image', [
@@ -167,6 +169,7 @@ class ArticleController extends Controller
         {
             $tags = Yii::$app->request->post('tags');
             $article->saveTags($tags);
+
             return $this->redirect(['view', 'id' => $article->id]);
         }
 
