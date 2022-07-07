@@ -1,6 +1,11 @@
 <?php
 use yii\helpers\Url;
 
+/** @var app\models\AsideMenu $popular */
+/** @var app\models\AsideMenu $recent */
+/** @var app\models\AsideMenu $categories */
+/** @var app\models\AsideMenu $discord */
+
 ?>
 
 <aside class="aside-menu grid--aside">
@@ -36,21 +41,25 @@ use yii\helpers\Url;
         </section>
     <?php endif; ?>
 
-    <?php if (!empty($asideCategories)): ?>
+    <?php if (!empty($categories)): ?>
     <section class="category">
         <div class="line"></div>
         <h4 class="aside-menu__title">Category</h4>
         <div class="line"></div>
         <ul class="category-list">
-            <?php foreach ($asideCategories as $category):?>
+            <?php foreach ($categories as $category):?>
                 <li class="category-list__item"><a href="<?= Url::toRoute(['site/category', 'id' => $category->id]) ?>"><?= $category->title ?></a></li>
             <?php endforeach;?>
         </ul>
     </section>
     <?php endif; ?>
 
-    <section class="discord-widget">
-        <iframe src="https://discord.com/widget?id=249297598530191361&theme=light" width="245" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-    </section>
+    <?php if ($discord === true): ?>
+        <section class="discord-widget">
+            <iframe src="https://discord.com/widget?id=249297598530191361&theme=light" width="245" height="400"
+                    allowtransparency="true" frameborder="0"
+                    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </section>
+    <?php endif; ?>
 
 </aside>

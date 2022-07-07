@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\AsideMenu;
 use app\models\Category;
 use app\models\CommentForm;
 use app\models\Tag;
@@ -15,9 +16,6 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    const POPULAR_ASIDE_POST_NUMBER = 3;
-    const RECENT_ASIDE_POST_NUMBER = 3;
-    const CATEGORIES_ASIDE_NUMBER = 7;
     const PAGE_SIZE = 3;
 
     /**
@@ -70,16 +68,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $data = Article::getAll(self::PAGE_SIZE);
-        $recent = Article::getRecent(self::RECENT_ASIDE_POST_NUMBER);
-        $popular = Article::getPopular(self::POPULAR_ASIDE_POST_NUMBER);
-        $asideCategories = Category::getAsideCategory(self::CATEGORIES_ASIDE_NUMBER);
+
+        $aside = AsideMenu::getAside(true, false, true, true);
 
         return $this->render('index', [
-            'recent' => $recent,
-            'popular' => $popular,
             'articles' => $data['element'],
             'pagination' => $data['pagination'],
-            'asideCategories' => $asideCategories,
+            'asidePopular' => $aside['popular'],
+            'asideCategories' => $aside['categories'],
+            'asideDiscord' => $aside['discord'],
         ]);
     }
 
@@ -125,12 +122,18 @@ class SiteController extends Controller
         $comments = $article->getArticleComments($id, 5);
         $commentForm = new CommentForm();
 
+        $aside = AsideMenu::getAside(true, true, true, true);
+
         return $this->render('single', [
             'tags' => $tags,
             'article' => $article,
             'comments' => $comments['element'],
             'pagination' => $comments['pagination'],
             'commentForm' => $commentForm,
+            'asidePopular' => $aside['popular'],
+            'asideRecent' => $aside['recent'],
+            'asideCategories' => $aside['categories'],
+            'asideDiscord' => $aside['discord'],
         ]);
     }
 
@@ -162,9 +165,14 @@ class SiteController extends Controller
         }
 
         $categories = Category::getAll();
+        $aside = AsideMenu::getAside(true, true, true, true);
 
         return $this->render('categories', [
             'categories' => $categories,
+            'asidePopular' => $aside['popular'],
+            'asideRecent' => $aside['recent'],
+            'asideCategories' => $aside['categories'],
+            'asideDiscord' => $aside['discord'],
         ]);
     }
 
@@ -192,9 +200,14 @@ class SiteController extends Controller
         }
 
         $tags = Tag::getAll();
+        $aside = AsideMenu::getAside(true, true, true, true);
 
         return $this->render('tags', [
             'tags' => $tags,
+            'asidePopular' => $aside['popular'],
+            'asideRecent' => $aside['recent'],
+            'asideCategories' => $aside['categories'],
+            'asideDiscord' => $aside['discord'],
         ]);
     }
 

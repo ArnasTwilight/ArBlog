@@ -1,11 +1,11 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var app\controllers\SiteController $popular */
-/** @var app\controllers\SiteController $recent */
-/** @var app\controllers\SiteController $categories */
+/** @var app\controllers\SiteController $asidePopular */
+/** @var app\controllers\SiteController $asideCategories */
 /** @var app\controllers\SiteController $articles */
 /** @var app\controllers\SiteController $pagination */
+/** @var app\controllers\SiteController $asideDiscord */
 
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
@@ -14,9 +14,9 @@ $this->title = 'ArBlog';
 ?>
 
 <?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
+    'popular' => $asidePopular,
+    'categories' => $asideCategories,
+    'discord' => $asideDiscord,
 ]); ?>
 
 <main class="main grid--main">
@@ -39,6 +39,13 @@ $this->title = 'ArBlog';
                         <p><?= (int) $post->viewed ?></p>
                         <div class="viewed-icon"></div>
                     </div>
+                </div>
+
+                <div class="post__author">
+                    <?php if ($post->user != null): ?>
+                        <img src="<?= $post->user->getImage() ?>" alt="author_avatar">
+                        <p class="author-name"><?= $post->user->name ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </article>

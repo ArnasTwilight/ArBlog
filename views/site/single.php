@@ -2,10 +2,13 @@
 
 /** @var yii\web\View $this */
 /** @var app\controllers\SiteController $article */
+/** @var app\controllers\SiteController $asidePopular */
+/** @var app\controllers\SiteController $asideRecent */
+/** @var app\controllers\SiteController $asideCategories */
+/** @var app\controllers\SiteController $asideDiscord */
 /** @var app\controllers\SiteController $tags */
 /** @var app\controllers\SiteController $comments */
 /** @var app\controllers\SiteController $commentForm */
-
 /** @var app\controllers\SiteController $pagination */
 
 use yii\helpers\Url;
@@ -16,9 +19,10 @@ $this->title = $article->title;
 ?>
 
 <?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
+    'popular' => $asidePopular,
+    'recent' => $asideRecent,
+    'categories' => $asideCategories,
+    'discord' => $asideDiscord,
 ]); ?>
 
 <main class="main grid--main">
@@ -52,6 +56,14 @@ $this->title = $article->title;
                     <div class="viewed-icon"></div>
                 </div>
             </div>
+
+            <div class="post__author">
+                <?php if ($article->user != null): ?>
+                    <img src="<?= $article->user->getImage() ?>" alt="author_avatar">
+                    <p class="author-name"><?= $article->user->name ?></p>
+                <?php endif; ?>
+            </div>
+
         </div>
     </article>
 

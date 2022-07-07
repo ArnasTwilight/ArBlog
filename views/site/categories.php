@@ -1,8 +1,11 @@
 <?php
 
 /** @var yii\web\View $this */
+/** @var app\controllers\SiteController $asidePopular */
+/** @var app\controllers\SiteController $asideRecent */
+/** @var app\controllers\SiteController $asideCategories */
+/** @var app\controllers\SiteController $asideDiscord */
 /** @var app\controllers\SiteController $categories */
-/** @var app\controllers\SiteController $article */
 
 use yii\helpers\Url;
 
@@ -10,9 +13,10 @@ $this->title = 'Categories';
 ?>
 
 <?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
+    'popular' => $asidePopular,
+    'recent' => $asideRecent,
+    'categories' => $asideCategories,
+    'discord' => $asideDiscord,
 ]); ?>
 
 <main class="main grid--main">

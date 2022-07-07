@@ -11,6 +11,7 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $passwordRepeat;
+    public $name;
 
     public function rules()
     {
@@ -24,6 +25,8 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             [['password'], 'validatePasswordMatch'],
             [['password','passwordRepeat'], 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            [['name'], 'string', 'max' => 255],
+            [['name'], 'default', 'value' => '[anonymous]'],
         ];
     }
 

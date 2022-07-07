@@ -64,9 +64,10 @@ class User extends ActiveRecord implements IdentityInterface
             [['isAdmin'], 'integer'],
             [['about'], 'string', 'max' => 255],
             [['name', 'email', 'login', 'password', 'image'], 'string', 'max' => 255],
-            [['name', 'login',], 'string','min' => 2, 'max' => 255],
+            [['name', 'login',], 'string', 'min' => 2, 'max' => 255],
             ['email', 'unique', 'message' => 'This email address has already been taken.'],
             ['login', 'unique', 'message' => 'This login has already been taken.'],
+            [['name'], 'string', 'max' => 125],
         ];
     }
 
@@ -112,11 +113,13 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
-    public function getImage() {
-        return ($this->image) ? '/uploads/'. Yii::$app->params['user.dirImage'] . '/' . $this->id . '/' . $this->image : Yii::$app->params['user.NoImage'];
+    public function getImage()
+    {
+        return ($this->image) ? '/uploads/' . Yii::$app->params['user.dirImage'] . '/' . $this->id . '/' . $this->image : Yii::$app->params['user.NoImage'];
     }
 
-    public function saveImage($filename) {
+    public function saveImage($filename)
+    {
         $this->image = $filename;
         return $this->save(false);
     }

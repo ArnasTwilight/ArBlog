@@ -42,6 +42,7 @@ class Article extends ActiveRecord
             [['content', 'description'], 'string'],
             [['date'], 'safe'],
             [['date'], 'default', 'value' => date('Y-m-d H:i:s')],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['viewed', 'status', 'user_id', 'category_id'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
             [['title', 'description'], 'string', 'min' => 1, 'max' => 255],
@@ -127,6 +128,11 @@ class Article extends ActiveRecord
     {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
             ->viaTable('article_tag', ['article_id' => 'id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     public function getSelectedTags($element = 'id')
