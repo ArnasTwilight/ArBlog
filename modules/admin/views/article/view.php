@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Set Image', ['set-image', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Set Category', ['set-category', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Set Tags', ['set-tags', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
-
+        <?php if (!empty($model->image)):?>
         <?= Html::a('Delete Image', ['delete-image', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-
+        <?php endif; ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

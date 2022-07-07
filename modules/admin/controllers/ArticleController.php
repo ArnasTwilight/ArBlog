@@ -205,10 +205,12 @@ class ArticleController extends Controller
 
     public function actionDeleteImage($id)
     {
-        $article = $this->findModel($id);
-        $article->deleteImage();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['view', 'id' => $article->id]);
+        $deleteImage = new DeleteImage();
+        $deleteImage->deleteImage($model, $this->getDirUpload());
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     private function getDirUpload()

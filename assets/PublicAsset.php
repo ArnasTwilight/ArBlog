@@ -9,6 +9,11 @@ class PublicAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        [
+            'href' => 'public/favico/faviconAR.ico',
+            'rel' => 'icon',
+            'sizes' => '32x32',
+        ],
         'public/css/normalize.css',
         ['public/css/style.css', 'id' => 'theme'],
     ];

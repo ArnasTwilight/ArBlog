@@ -141,10 +141,12 @@ class UserController extends Controller
 
     public function actionDeleteImage($id)
     {
-        $user = $this->findModel($id);
-        $user->deleteImage();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['view', 'id' => $user->id]);
+        $deleteImage = new DeleteImage();
+        $deleteImage->deleteImage($model, $this->getDirUpload());
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     private function getDirUpload()
