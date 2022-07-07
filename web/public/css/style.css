@@ -11,7 +11,9 @@
     margin: 0;
 }
 body, html {
+    height: 100%;
     font-family: Jura, sans-serif;
+    color: var(--text-color);
 }
 ul, li {
     list-style: none;
@@ -53,6 +55,7 @@ blockquote {
 .wrapper {
     max-width: 1120px;
     margin: 0 auto;
+    min-height: 100%;
 }
 .line {
     width: 40px;
@@ -65,7 +68,7 @@ blockquote {
 .grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 80px 1fr 1fr 1fr 200px;
+    grid-template-rows: auto 1fr 1fr 1fr auto;
     grid-template-areas:
         "header header header header header header header header header header header header"
         "article article article article article article article article article aside aside aside"
@@ -372,6 +375,7 @@ blockquote {
 
 /* login */
 .login-container {
+    width: 50%;
     margin: 0 auto;
     padding: 20px;
     background-color: var(--frame-color);
@@ -552,6 +556,7 @@ label {
 
 /* footer */
 .footer {
-    height: 200px;
+    color: var(--text-color);
+    padding: 40px;
     background: var(--frame-color);;
 }

@@ -7,10 +7,12 @@ use yii\helpers\Html;
 
 $this->title = 'Update: ' . $model->login;
 ?>
-<main class="main grid--main cabinet">
+<main class="main grid--main">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="cabinet">
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
+    </div>
 
 </main>

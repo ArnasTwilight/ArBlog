@@ -10,41 +10,35 @@ use yii\bootstrap4\Html;
 $this->title = 'Register';
 ?>
 
-<?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
-]); ?>
+<div class="grid--main">
 
-<div class="login-container grid--main">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="login-container">
+        <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'layout' => 'horizontal',
+            'fieldConfig' => [
 //                'template' => "{label}\n{input}\n{error}",
-            'labelOptions' => ['class' => 'label'],
-            'inputOptions' => ['class' => 'input'],
-            'errorOptions' => ['class' => 'error'],
-        ],
-    ]); ?>
+                'labelOptions' => ['class' => 'label'],
+                'inputOptions' => ['class' => 'input'],
+                'errorOptions' => ['class' => 'error'],
+            ],
+        ]); ?>
 
-    <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'email')->textInput() ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
 
-    <?= $form->field($model, 'email')->textInput() ?>
-
-    <?= $form->field($model, 'password')->passwordInput() ?>
-
-    <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
-
-    <div class="form-group">
-        <div class="offset-lg-1 col-lg-11">
-            <?= Html::submitButton('Register', ['class' => 'btn', 'name' => 'login-button']) ?>
+        <div class="form-group">
+            <div class="offset-lg-1 col-lg-11">
+                <?= Html::submitButton('Register', ['class' => 'btn', 'name' => 'login-button']) ?>
+            </div>
         </div>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
+    </div>
 
 </div>
 

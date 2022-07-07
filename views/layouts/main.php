@@ -23,7 +23,7 @@ PublicAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="d-flex flex-column h-100">
+<body>
 <?php $this->beginBody() ?>
 
 <div class="wrapper grid">
@@ -53,7 +53,7 @@ PublicAsset::register($this);
     <?= $content ?>
 
     <footer class="footer grid--footer">
-
+        <small>&#169 Copyright 2022 - <?php echo date('Y'); ?>, ArBlog</small>
     </footer>
 </div>
 

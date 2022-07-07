@@ -11,7 +11,9 @@
     margin: 0;
 }
 body, html {
+    height: 100%;
     font-family: Jura, sans-serif;
+    color: var(--text-color);
 }
 ul, li {
     list-style: none;
@@ -45,9 +47,15 @@ body {
     background-size: cover;
 }
 
+blockquote {
+    border-left: 2px solid var(--text-second-color);
+    margin: 15px 0;
+}
+
 .wrapper {
     max-width: 1120px;
     margin: 0 auto;
+    min-height: 100%;
 }
 .line {
     width: 40px;
@@ -60,7 +68,7 @@ body {
 .grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 80px 1fr 1fr 1fr 200px;
+    grid-template-rows: auto 1fr 1fr 1fr auto;
     grid-template-areas:
         "header header header header header header header header header header header header"
         "article article article article article article article article article aside aside aside"
@@ -157,6 +165,8 @@ body {
     color: var(--accent-color);
 }
 .aside-menu__img {
+    max-width: 225px;
+    max-height: 120px;
     position: relative;
     overflow: hidden;
 }
@@ -204,6 +214,8 @@ body {
     margin-bottom: 40px;
 }
 .post__img {
+    max-width: 835px;
+    height: 440px;
     position: relative;
     overflow: hidden;
 }
@@ -227,7 +239,7 @@ body {
     padding: 40px;
     overflow: hidden;
 }
-post__short-info img {
+.post__short-info img {
     max-width: 755px;
 }
 .post__category {
@@ -288,6 +300,51 @@ post__short-info img {
     justify-content: left;
     color: var(--text-second-color);
 }
+.post__tags {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+.post__tags-item {
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    transition: 0.5s;
+}
+.post__tags-item:not(:last-child) {
+    margin-right: 5px;
+}
+.post__tags-item:hover {
+    background: var(--accent-color);
+    color: #FFFFFF;
+}
+.info-tag {
+    background-color: var(--frame-color);
+    color: var(--text-color);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.post__author {
+    margin-top: 10px;
+    display: flex;
+}
+.post__author img {
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid var(--text-second-color);
+    width: 64px;
+    height: 64px;
+}
+.author-name {
+    line-height: 32px;
+    color: var(--text-color);
+}
+
+/* error */
+.error-block {
+    background-color: var(--frame-color);
+    padding: 40px;
+}
 
 /* categories */
 .categories {
@@ -319,17 +376,19 @@ post__short-info img {
 
 /* login */
 .login-container {
+    width: 50%;
     margin: 0 auto;
     padding: 20px;
     background-color: var(--frame-color);
 }
-.login-container h1, p {
+.login-container > h1 > p {
     color: var(--text-color);
     text-align: center;
 }
 label {
     color: var(--text-color);
 }
+
 .input {
     width: 100%;
     padding: 10px 0;
@@ -351,12 +410,6 @@ label {
     background: var(--accent-dark-color);
 }
 
-/* error */
-.error-block {
-    background-color: var(--frame-color);
-    padding: 40px;
-}
-
 /* pagination */
 .pagination {
     display: flex;
@@ -370,7 +423,6 @@ label {
     height: 100%;
     text-align: center;
     font-size: 1.25em;
-    color: var(--text-color);
 }
 .pagination li {
     min-width: 50px;
@@ -385,7 +437,7 @@ label {
     background-color: var(--accent-color);
 }
 .disabled span {
-    color: var(--text-second-color);
+    color: #c1c1c1;
 }
 .active a {
     color: #FFFFFF;
@@ -401,14 +453,13 @@ label {
     display: flex;
 }
 .cabinet img {
-    width: 128px;
-    height: 128px;
+    max-width: 128px;
+    max-height: 128px;
 }
 .user-info {
     margin-left: 20px;
 }
 .user-info__item {
-    color: var(--text-color);
     font-size: 1.25em;
     padding: 10px;
     border-bottom: 1px solid #c1c1c1;
@@ -453,7 +504,6 @@ label {
     margin-top: 30px;
 }
 .black-theme {
-    color: var(--text-color);
     line-height: 38px;
 }
 
@@ -476,8 +526,8 @@ label {
 .comment__user-img {
     display: block;
     margin: 0 auto;
-    width: 96px;
-    height: 96px;
+    max-width: 96px;
+    max-height: 96px;
 }
 .comment__user-name {
     text-align: center;
@@ -507,6 +557,7 @@ label {
 
 /* footer */
 .footer {
-    height: 200px;
+    color: var(--text-color);
+    padding: 40px;
     background: var(--frame-color);;
 }

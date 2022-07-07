@@ -8,18 +8,20 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'New password';
 ?>
-<main class="main grid--main cabinet">
+<main class="main grid--main">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="cabinet">
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model,'oldPassword')->passwordInput()->label('Old password') ?>
-    <?= $form->field($model, 'newPassword')->passwordInput() ?>
-    <?= $form->field($model, 'repeatPassword')->passwordInput() ?>
+        <?= $form->field($model, 'oldPassword')->passwordInput()->label('Old password') ?>
+        <?= $form->field($model, 'newPassword')->passwordInput() ?>
+        <?= $form->field($model, 'repeatPassword')->passwordInput() ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <div class="form-group">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
 
 </main>

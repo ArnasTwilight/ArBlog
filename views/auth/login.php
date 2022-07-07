@@ -10,13 +10,9 @@ use yii\bootstrap4\Html;
 $this->title = 'Login';
 ?>
 
-<?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
-]); ?>
+<div class="grid--main">
 
-    <div class="login-container grid--main">
+    <div class="login-container">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <?php $form = ActiveForm::begin([
@@ -31,9 +27,7 @@ $this->title = 'Login';
         ]); ?>
 
         <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
-
         <?= $form->field($model, 'password')->passwordInput() ?>
-
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
@@ -43,8 +37,8 @@ $this->title = 'Login';
                 <?= Html::submitButton('Login', ['class' => 'btn', 'name' => 'login-button']) ?>
             </div>
         </div>
-
         <?php ActiveForm::end(); ?>
+    </div>
 
 </div>
 
