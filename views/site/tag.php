@@ -4,6 +4,10 @@
 /** @var app\controllers\SiteController $tag */
 /** @var app\controllers\SiteController $articles */
 /** @var app\controllers\SiteController $emptyCategory */
+/** @var app\controllers\SiteController $asidePopular */
+/** @var app\controllers\SiteController $asideRecent */
+/** @var app\controllers\SiteController $asideCategories */
+/** @var app\controllers\SiteController $asideDiscord */
 
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
@@ -12,9 +16,10 @@ $this->title = $tag->title;
 ?>
 
 <?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
+    'popular' => $asidePopular,
+    'recent' => $asideRecent,
+    'categories' => $asideCategories,
+    'discord' => $asideDiscord,
 ]); ?>
 
 <main class="main grid--main">

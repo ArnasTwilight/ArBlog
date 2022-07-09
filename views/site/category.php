@@ -4,6 +4,9 @@
 /** @var app\controllers\SiteController $category */
 /** @var app\controllers\SiteController $articles */
 /** @var app\controllers\SiteController $pagination */
+/** @var app\controllers\SiteController $asidePopular */
+/** @var app\controllers\SiteController $asideRecent */
+/** @var app\controllers\SiteController $asideDiscord */
 
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
@@ -12,9 +15,9 @@ $this->title = $category->title;
 ?>
 
 <?= $this->render('/partials/sidebar', [
-    'popular' => $popular,
-    'recent' => $recent,
-    'asideCategories' => $asideCategories,
+    'popular' => $asidePopular,
+    'recent' => $asideRecent,
+    'discord' => $asideDiscord,
 ]); ?>
 
 <main class="main grid--main">

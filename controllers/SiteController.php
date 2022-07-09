@@ -150,11 +150,16 @@ class SiteController extends Controller
             Yii::$app->getSession()->setFlash('category-no-post', 'No post in: ' . $category->title);
         }
 
+        $aside = AsideMenu::getAside(true, true, true, true);
 
         return $this->render('category', [
             'category' => $category,
             'articles' => $data['element'],
             'pagination' => $data['pagination'],
+            'asidePopular' => $aside['popular'],
+            'asideCategories' => $aside['Categories'],
+            'asideRecent' => $aside['recent'],
+            'asideDiscord' => $aside['discord'],
         ]);
     }
 
@@ -165,13 +170,12 @@ class SiteController extends Controller
         }
 
         $categories = Category::getAll();
-        $aside = AsideMenu::getAside(true, true, true, true);
+        $aside = AsideMenu::getAside(true, true, false, true);
 
         return $this->render('categories', [
             'categories' => $categories,
             'asidePopular' => $aside['popular'],
             'asideRecent' => $aside['recent'],
-            'asideCategories' => $aside['categories'],
             'asideDiscord' => $aside['discord'],
         ]);
     }
@@ -224,10 +228,16 @@ class SiteController extends Controller
             Yii::$app->getSession()->setFlash('tag-no-post', 'No post in: ' . $tag->title);
         }
 
+        $aside = AsideMenu::getAside(true, true, true, true);
+
         return $this->render('tag', [
             'tag' => $tag,
             'articles' => $data['element'],
             'pagination' => $data['pagination'],
+            'asidePopular' => $aside['popular'],
+            'asideCategories' => $aside['Categories'],
+            'asideRecent' => $aside['recent'],
+            'asideDiscord' => $aside['discord'],
         ]);
     }
 }

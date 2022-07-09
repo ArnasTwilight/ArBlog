@@ -15,7 +15,6 @@ $this->title = 'Categories';
 <?= $this->render('/partials/sidebar', [
     'popular' => $asidePopular,
     'recent' => $asideRecent,
-    'categories' => $asideCategories,
     'discord' => $asideDiscord,
 ]); ?>
 
